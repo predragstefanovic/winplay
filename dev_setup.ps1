@@ -28,6 +28,9 @@ choco install -y git --params "/GitOnlyOnPath /NoShellIntegration /WindowsTermin
 
 RefreshEnv
 
+if (Test-Path "$env:USERPROFILE\winplay") {
+    Remove-Item -Recurse -Force "$env:USERPROFILE\winplay"
+}
 git clone https://github.com/predragstefanovic/winplay.git "$env:USERPROFILE\winplay"
 
 # --- Configuration Scripts ---
