@@ -22,45 +22,45 @@ function Remove-AppPackage {
 
 # List of applications to be removed.
 $applicationList = @(
-    "Microsoft.BingFinance",
-    "Microsoft.3DBuilder",
-    "Microsoft.BingNews",
-    "Microsoft.BingSports",
-    "Microsoft.BingWeather",
-    "Microsoft.CommsPhone",
-    "Microsoft.Getstarted",
-    "Microsoft.WindowsMaps",
-    "*MarchofEmpires*",
-    "Microsoft.GetHelp",
-    "Microsoft.Messaging",
-    "*Minecraft*",
-    "Microsoft.OneConnect",
-    "Microsoft.WindowsPhone",
-    "Microsoft.WindowsSoundRecorder",
-    "*Solitaire*",
-    "Microsoft.Office.Sway",
-    "Microsoft.XboxApp",
-    "Microsoft.XboxIdentityProvider",
-    "Microsoft.ZuneMusic",
-    "Microsoft.ZuneVideo",
-    "Microsoft.NetworkSpeedTest",
-    "Microsoft.FreshPaint",
-    "Microsoft.Print3D",
-    "*Autodesk*",
-    "*BubbleWitch*",
-    "king.com*",
-    "G5*",
-    "*Facebook*",
-    "*LinkedIn*",
-    "*Keeper*",
-    "*Netflix*",
-    "*Twitter*",
-    "*Plex*",
-    "*.Duolingo-LearnLanguagesforFree",
-    "*.EclipseManager",
-    "ActiproSoftwareLLC.562882FEEB491", # Code Writer
-    "*.AdobePhotoshopExpress"
-)
+	"Microsoft.BingFinance"
+	"Microsoft.3DBuilder"
+	"Microsoft.BingNews"
+	"Microsoft.BingSports"
+	"Microsoft.BingWeather"
+	"Microsoft.CommsPhone"
+	"Microsoft.Getstarted"
+	"Microsoft.WindowsMaps"
+	"*MarchofEmpires*"
+	"Microsoft.GetHelp"
+	"Microsoft.Messaging"
+	"*Minecraft*"
+	"Microsoft.OneConnect"
+	"Microsoft.WindowsPhone"
+	"Microsoft.WindowsSoundRecorder"
+	"*Solitaire*"
+	"Microsoft.Office.Sway"
+	"Microsoft.XboxApp"
+	"Microsoft.XboxIdentityProvider"
+	"Microsoft.ZuneMusic"
+	"Microsoft.ZuneVideo"
+	"Microsoft.NetworkSpeedTest"
+	"Microsoft.FreshPaint"
+	"Microsoft.Print3D"
+	"*Autodesk*"
+	"*BubbleWitch*"
+    "king.com*"
+    "G5*"
+	"*Facebook*"
+	"*Keeper*"
+	"*Netflix*"
+	"*Twitter*"
+	"*Plex*"
+	"*.Duolingo-LearnLanguagesforFree"
+	"*.EclipseManager"
+	"ActiproSoftwareLLC.562882FEEB491" # Code Writer
+	"*.AdobePhotoshopExpress"
+);
+
 
 # Iterate over the application list and remove each app.
 foreach ($app in $applicationList) {
