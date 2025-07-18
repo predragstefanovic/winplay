@@ -4,9 +4,7 @@ Disable-UAC
 $Boxstarter.AutoLogin=$false
 
 # Install winget
-Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
-Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-Install-Module -Name Microsoft.WinGet.Client
+irm https://github.com/asheroto/winget-install/releases/latest/download/winget-install.ps1 | iex
 
 # Install git and clone repository containing scripts and config files
 # TODO: see how to improve install that by using chezmoi (choco install -y chezmoi)
