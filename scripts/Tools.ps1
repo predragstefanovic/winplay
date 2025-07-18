@@ -27,7 +27,6 @@ Write-Host "Installing Development Tools..." -ForegroundColor Yellow
 winget install -e -h --id AndreasWascher.RepoZ
 winget install -e -h --id GitHub.cli
 choco install -y python
-choco install -y sysinternals
 #endregion
 
 #region PowerShell Configuration
