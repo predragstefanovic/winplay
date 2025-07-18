@@ -8,7 +8,7 @@ source: https://github.com/TechWatching/dotfiles/tree/main
 The script code is organized in a hierarchy
 
 **Recipes**
-A recipe is the script you run.  It calls multiple helper scripts.  These currently live in the root of the project (e.g. dev_web.ps1)
+A recipe is the script you run. It calls multiple helper scripts. These currently live in the root of the project (e.g. dev_setup.ps1)
 
 **Helper Scripts**: A helper script performs setup routines that may be useful by many recipes. Recipes call helper scripts (you don't run helper scripts directly).  The helper scripts live in the **scripts** folder
 

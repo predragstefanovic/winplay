@@ -64,7 +64,7 @@ $applicationList = @(
 
 # Iterate over the application list and remove each app.
 foreach ($app in $applicationList) {
-    Remove-AppPackage -AppName $app
+    Remove-AppPackage $app
 }
 
 # Disable suggested apps in the Start Menu.
