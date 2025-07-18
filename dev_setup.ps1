@@ -33,17 +33,14 @@ Write-Host "Cloning repository with scripts..."
 if (Test-Path "$env:USERPROFILE\winplay") {
     Remove-Item -Recurse -Force "$env:USERPROFILE\winplay"
 }
-Start-Process -FilePath "git" -ArgumentList "clone", "https://github.com/predragstefanovic/winplay.git", "$env:USERPROFILE\winplay" -Wait -NoNewWindow
 
-$verificationFile = Join-Path $env:USERPROFILE "winplay\README.md"
-Write-Host "Waiting for repository clone to complete..."
-while (-not (Test-Path $verificationFile)) {
-    Start-Sleep -Seconds 2
-    Write-Host "." -NoNewline
-}
-Write-Host ""
-Write-Host "Clone verification successful. '$verificationFile' found."
+git clone "https://github.com/predragstefanovic/winplay.git" "$env:USERPROFILE\winplay"
 
+Write-Host "Verifying clone... Listing contents of $env:USERPROFILE"
+Get-ChildItem -Path $env:USERPROFILE
+
+Write-Host "Listing contents of cloned directory..."
+Get-ChildItem -Path "$env:USERPROFILE\winplay"
 
 Write-Host "Configuring git and winget..."
 # --- Configuration Scripts ---
