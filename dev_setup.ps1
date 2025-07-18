@@ -33,7 +33,7 @@ Write-Host "Cloning repository with scripts..."
 if (Test-Path "$env:USERPROFILE\winplay") {
     Remove-Item -Recurse -Force "$env:USERPROFILE\winplay"
 }
-git clone https://github.com/predragstefanovic/winplay.git "$env:USERPROFILE\winplay"
+Start-Process -FilePath "git" -ArgumentList "clone", "https://github.com/predragstefanovic/winplay.git", "$env:USERPROFILE\winplay" -Wait -NoNewWindow
 
 # --- Configuration Scripts ---
 . "$env:USERPROFILE\winplay\scripts\Git-Config.ps1"
