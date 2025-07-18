@@ -42,12 +42,14 @@ New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\Documents\\PowerShell\Mi
 #region Prompt Customization
 Write-Host "Configuring Prompt..." -ForegroundColor Yellow
 winget install -e -h --id JanDeDobbeleer.OhMyPosh
+RefreshEnv
 pwsh -Command { Install-Module posh-git -Scope CurrentUser -Force }
 #endregion
 
 #region Nushell Configuration
 Write-Host "Configuring NuShell..." -ForegroundColor Yellow
 winget install -e -h --id Nushell.Nushell
+RefreshEnv
 # saves an initialization script to ~/.oh-my-posh.nu that will be used in Nushell config file
 oh-my-posh init nu --config "$env:USERPROFILE\winplay\config\prompt\.oh-my-posh.omp.json"
 Remove-Item -Path "$env:USERPROFILE\AppData\Roaming\nushell\config.nu" -Force
