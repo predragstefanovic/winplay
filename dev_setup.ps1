@@ -1,47 +1,41 @@
-## This command disables User Account Control to run the script without user interaction, it is enabled at the end of the script.
-## To avoid security concerns you can comment it if you prefer, otherwhise please check the software you install is safe and use this command at your own risk.
-Disable-UAC
-$Boxstarter.AutoLogin=$false
+<#
+.SYNOPSIS
+    A Boxstarter script to automate the setup of a Windows development environment.
+.DESCRIPTION
+    This script orchestrates the entire development environment setup. It disables UAC,
+    installs essential tools like winget and Git, clones the winplay repository, and then
+    executes a series of helper scripts to configure the system, install software, and
+    set up the development environment.
+#>
 
-# Install winget
+# Disable User Account Control (UAC) to allow the script to run without interruption.
+# UAC will be re-enabled at the end of the script.
+# WARNING: Disabling UAC can be a security risk. Review the installed software to ensure it is safe.
+Disable-UAC
+$Boxstarter.AutoLogin = $false
+
+# Enable Developer Mode on the system.
+Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelUnlock -Name AllowDevelopmentWithoutDevLicense -Value 1
+
+
+# Install winget, the Windows Package Manager.
 irm https://github.com/asheroto/winget-install/releases/latest/download/winget-install.ps1 | iex
 
-# Install git and clone repository containing scripts and config files
-# TODO: see how to improve install that by using chezmoi (choco install -y chezmoi)
+# Install Git and clone the winplay repository.
 choco install -y git --params "/GitOnlyOnPath /NoShellIntegration /WindowsTerminal"
 RefreshEnv
 git clone https://github.com/predragstefanovic/winplay.git "$env:USERPROFILE\winplay"
-# Git configuration
-Remove-Item -Path "$env:USERPROFILE\.gitconfig" -Force
-New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.gitconfig" -Target "$env:USERPROFILE\winplay\config\git\.gitconfig"
-# TODO: configure git signature
 
-# Winget configuration
-Remove-Item -Path "$env:USERPROFILE\AppData\Local\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\settings.json" -Force
-New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\AppData\Local\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\settings.json" -Target "$env:USERPROFILE\winplay\config\winget\settings.json"
+# --- Configuration Scripts ---
+. "$env:USERPROFILE\winplay\scripts\Git-Config.ps1"
+. "$env:USERPROFILE\winplay\scripts\Winget-Config.ps1"
 
-#--- Enable developer mode on the system ---
-Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelUnlock -Name AllowDevelopmentWithoutDevLicense -Value 1
-
-#--- Setting up Windows ---
+# --- Setup Scripts ---
 . "$env:USERPROFILE\winplay\scripts\FileExplorerSettings.ps1"
 . "$env:USERPROFILE\winplay\scripts\RemoveDefaultApps.ps1"
 . "$env:USERPROFILE\winplay\scripts\Tools.ps1"
 . "$env:USERPROFILE\winplay\scripts\IDEs.ps1"
 
-# TODO: install WSL2 / Ubuntu
-# choco install -y Microsoft-Windows-Subsystem-Linux -source windowsfeatures
-# choco install -y VirtualMachinePlatform -source windowsfeatures
-# wsl --set-default-version 2
-# choco install wsl2 --params "/Version:2 /Retry:true"
-
-# TODO: Docker
-# winget install -e -h --id suse.RancherDesktop
-
-# // windowsfeatures (Windows Sandbox, .NET Framework)
-# // Taskbar (Set-BoxstarterTaskbarOptions)
-
-#--- reenabling critial items ---
+# --- Finalization ---
+# Re-enable User Account Control (UAC).
 Enable-UAC
-#Enable-MicrosoftUpdate
-#Install-WindowsUpdate -acceptEula

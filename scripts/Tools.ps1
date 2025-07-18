@@ -1,74 +1,73 @@
-# ---------------------------------------------- #
-# Browsers  ------------------------------------ #
-# ---------------------------------------------- #
-choco install -y googlechrome
+<#
+.SYNOPSIS
+    Installs a collection of development tools, browsers, and system utilities.
+.DESCRIPTION
+    This script uses Chocolatey and winget to install a wide range of software,
+    including browsers, development tools, command-line utilities, and Azure tools.
+    It also configures PowerShell, Windows Terminal, and other settings.
+#>
 
-# ---------------------------------------------- #
-# Common tools  --------------------------------- #
-# ---------------------------------------------- #
+#region Browsers
+Write-Host "Installing Browsers..." -ForegroundColor Yellow
+choco install -y googlechrome
+#endregion
+
+#region Common Tools
+Write-Host "Installing Common Tools..." -ForegroundColor Yellow
 choco install -y 7zip
 winget install -e -h --id Microsoft.BingWallpaper
 winget install -e -h --id JohnMacFarlane.Pandoc
 winget install -e -h --id Microsoft.Whiteboard -s msstore
-winget install -e -h --id Microsoft.PowerToys # settings to sync
-# Already  installed by default
-# winget install -e -h --id Microsoft.Teams
-# winget install -e -h --id Microsoft.Office
+winget install -e -h --id Microsoft.PowerToys # Note: Settings for PowerToys should be synced separately.
 winget install -e -h --id Dell.DisplayManager
+#endregion
 
-# ---------------------------------------------- #
-# Dev tools  ----------------------------------- #
-# ---------------------------------------------- #
+#region Development Tools
+Write-Host "Installing Development Tools..." -ForegroundColor Yellow
 winget install -e -h --id AndreasWascher.RepoZ
-# iwr -useb get.scoop.sh | iex
 winget install -e -h --id GitHub.cli
 choco install -y python
 choco install -y sysinternals
+#endregion
 
-# ---------------------------------------------- #
-# Prompt  -------------------------------------- #
-# ---------------------------------------------- #
-pwsh -Command { Install-Module posh-git -Scope CurrentUser -Force}
+#region Prompt Customization
+Write-Host "Configuring Prompt..." -ForegroundColor Yellow
+pwsh -Command { Install-Module posh-git -Scope CurrentUser -Force }
 winget install -e -h --id JanDeDobbeleer.OhMyPosh
+#endregion
 
-# ---------------------------------------------- #
-# PowerShell  ---------------------------------- #
-# ---------------------------------------------- #
+#region PowerShell Configuration
+Write-Host "Configuring PowerShell..." -ForegroundColor Yellow
 winget install -e -h --id Microsoft.PowerShell
-# Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-Remove-Item -Path "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -Force
-New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -Target "$env:USERPROFILE\winplay\config\powerShell\Microsoft.PowerShell_profile.ps1"
+# Create a symbolic link for the PowerShell profile.
+Remove-Item -Path "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -Force -ErrorAction SilentlyContinue
+New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\Documents\\PowerShell\Microsoft.PowerShell_profile.ps1" -Target "$env:USERPROFILE\winplay\config\powerShell\Microsoft.PowerShell_profile.ps1"
+#endregion
 
-# Uncomment if you want nushell
-# ---------------------------------------------- #
-# NuShell  ---------------------------------- #
-# ---------------------------------------------- #
-#winget install -e -h --id Nushell.Nushell
-# saves an initialization script to ~/.oh-my-posh.nu that will be used in Nushell config file
-#oh-my-posh init nu --config "$env:USERPROFILE\winplay\config\prompt\.oh-my-posh.omp.json"
-#Remove-Item -Path "$env:USERPROFILE\AppData\Roaming\nushell\config.nu" -Force
-#New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\AppData\Roaming\nushell\config.nu" -Target "$env:USERPROFILE\winplay\config\nu\config.nu"
-# config auto complete dotnet / nuke / ...
-
-# ---------------------------------------------- #
-# Windows Terminal ----------------------------- #
-# ---------------------------------------------- #
-# Windows Terminal (stable + preview) install with Cascadia Code PL font
+#region Windows Terminal Configuration
+Write-Host "Configuring Windows Terminal..." -ForegroundColor Yellow
+# Install Windows Terminal (Stable and Preview) and Cascadia Code Nerd Font.
 winget install -e -h --id Microsoft.WindowsTerminal -s msstore
 winget install -e -h --id Microsoft.WindowsTerminalPreview -s msstore
 choco install -y cascadia-code-nerd-font
-# Windows terminal configuration
-Remove-Item -Path "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" -Force
-New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" -Target "$env:USERPROFILE\winplay\config\windowsTerminal\settings.json"
-cp "$env:USERPROFILE\winplay\config\windowsTerminal\icons\*" "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState\"
-# Windows terminal preview configuration
-Remove-Item -Path "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json" -Force
-New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json" -Target "$env:USERPROFILE\winplay\config\windowsTerminal\settings.json"
-cp "$env:USERPROFILE\winplay\config\windowsTerminal\icons\*" "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\RoamingState\"
 
-# ---------------------------------------------- #
-# Azure tools  --------------------------------- #
-# ---------------------------------------------- #
+# Configure Windows Terminal settings and icons.
+$terminalSettingsPath = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+$terminalIconsPath = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState\"
+Remove-Item -Path $terminalSettingsPath -Force -ErrorAction SilentlyContinue
+New-Item -ItemType SymbolicLink -Path $terminalSettingsPath -Target "$env:USERPROFILE\winplay\config\windowsTerminal\settings.json"
+Copy-Item -Path "$env:USERPROFILE\winplay\config\windowsTerminal\icons\*" -Destination $terminalIconsPath -Force
+
+# Configure Windows Terminal Preview settings and icons.
+$terminalPreviewSettingsPath = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json"
+$terminalPreviewIconsPath = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\RoamingState\"
+Remove-Item -Path $terminalPreviewSettingsPath -Force -ErrorAction SilentlyContinue
+New-Item -ItemType SymbolicLink -Path $terminalPreviewSettingsPath -Target "$env:USERPROFILE\winplay\config\windowsTerminal\settings.json"
+Copy-Item -Path "$env:USERPROFILE\winplay\config\windowsTerminal\icons\*" -Destination $terminalPreviewIconsPath -Force
+#endregion
+
+#region Azure Tools
+Write-Host "Installing Azure Tools..." -ForegroundColor Yellow
 winget install -e -h --id Microsoft.AzureCLI
 winget install -e -h --id Microsoft.AzureCosmosEmulator
 winget install -e -h --id Microsoft.AzureDataStudio
@@ -76,14 +75,6 @@ winget install -e -h --id Microsoft.azure-iot-explorer
 winget install -e -h --id Microsoft.AzureStorageExplorer
 winget install -e -h --id Pulumi.Pulumi
 winget install -e -h --id Microsoft.AzureFunctionsCoreTools
-# Azurite can be installed through vscode extension or as a global npm package
-# pnpm add -g azurite
+#endregion
 
-
-
-# ---------------------------------------------- #
-# Blog tools  ---------------------------------- #
-# ---------------------------------------------- #
-# wyam
-# netlify
-# statiq
+Write-Host "Tool installation and configuration complete." -ForegroundColor Green

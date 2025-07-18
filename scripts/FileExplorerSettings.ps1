@@ -1,14 +1,23 @@
-#--- Configuring Windows properties ---
-#--- Windows Features ---
-# Show hidden files, Show protected OS files, Show file extensions
+<#
+.SYNOPSIS
+    Configures Windows File Explorer settings for a better user experience.
+.DESCRIPTION
+    This script modifies the Windows Registry to change several File Explorer setting.
+    It makes hidden and system files visible, shows file extensions, and adjusts the
+    navigation pane and taskbar behaviors.
+#>
+
+# Show hidden files, protected OS files, and file extensions
 Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtectedOSFiles -EnableShowFileExtensions
 
-#--- File Explorer Settings ---
-# will expand explorer to the actual folder you're in
+# Set File Explorer to expand to the current folder in the navigation pane
 Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneExpandToCurrentFolder -Value 1
-#adds things back in your left pane like recycle bin
+
+# Show all folders in the navigation pane, including Recycle Bin
 Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneShowAllFolders -Value 1
-#opens PC to This PC, not quick access
+
+# Set File Explorer to open to "This PC" instead of "Quick access"
 Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name LaunchTo -Value 1
-#taskbar where window is open for multi-monitor
+
+# Configure the taskbar to show windows on the monitor where they are open
 Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name MMTaskbarMode -Value 2
