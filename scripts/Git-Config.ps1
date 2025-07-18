@@ -18,4 +18,3 @@ if (Test-Path $gitConfigTarget) {
 New-Item -ItemType SymbolicLink -Path $gitConfigTarget -Target $gitConfigSource
 
 Write-Host "Git configuration complete." -ForegroundColor Green
-# TODO: Configure git signature

@@ -19,11 +19,15 @@ Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelU
 
 
 # Install winget, the Windows Package Manager.
-irm https://github.com/asheroto/winget-install/releases/latest/download/winget-install.ps1 | iex
+$wingetInstallScript = Join-Path $env:TEMP "winget-install.ps1"
+Invoke-RestMethod -Uri "https://github.com/asheroto/winget-install/releases/latest/download/winget-install.ps1" -OutFile $wingetInstallScript
+& $wingetInstallScript
 
 # Install Git and clone the winplay repository.
 choco install -y git --params "/GitOnlyOnPath /NoShellIntegration /WindowsTerminal"
+
 RefreshEnv
+
 git clone https://github.com/predragstefanovic/winplay.git "$env:USERPROFILE\winplay"
 
 # --- Configuration Scripts ---
