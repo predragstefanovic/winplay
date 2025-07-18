@@ -18,6 +18,4 @@ if (Test-Path $wingetConfigTarget) {
 
 New-Item -ItemType SymbolicLink -Path $wingetConfigTarget -Target $wingetConfigSource
 
-winget import $wingetPackages
-
 Write-Host "winget configuration complete." -ForegroundColor Green

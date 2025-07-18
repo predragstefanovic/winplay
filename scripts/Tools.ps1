@@ -48,8 +48,8 @@ pwsh -Command { Install-Module posh-git -Scope CurrentUser -Force }
 #region Windows Terminal Configuration
 Write-Host "Configuring Windows Terminal..." -ForegroundColor Yellow
 # Install Windows Terminal (Stable and Preview) and Cascadia Code Nerd Font.
-winget install -e -h --id Microsoft.WindowsTerminal -s msstore
-winget install -e -h --id Microsoft.WindowsTerminalPreview -s msstore
+winget install -e -h --id Microsoft.WindowsTerminal
+winget install -e -h --id Microsoft.WindowsTerminalPreview
 choco install -y cascadia-code-nerd-font
 
 # Configure Windows Terminal settings and icons.
