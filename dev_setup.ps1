@@ -34,11 +34,8 @@ if (Test-Path "$env:USERPROFILE\winplay") {
     Remove-Item -Recurse -Force "$env:USERPROFILE\winplay"
 }
 
-Start-Process git -ArgumentList "clone --progress https://github.com/predragstefanovic/winplay.git $env:USERPROFILE\winplay" -Wait
-Write-Host "Verifying clone... Listing contents of $env:USERPROFILE"
-Get-ChildItem -Path $env:USERPROFILE
-
-Write-Host "Listing contents of cloned directory..."
+git clone --progress https://github.com/predragstefanovic/winplay.git $env:USERPROFILE\winplay
+Write-Host "Verifying clone... Listing contents of $env:USERPROFILE\winplay"
 Get-ChildItem -Path "$env:USERPROFILE\winplay"
 
 Write-Host "Configuring git and winget..."

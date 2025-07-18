@@ -7,12 +7,6 @@
 [rebase]
 	autoStash = true
 	autosquash = true
-# [diff]
-#   tool = vscode
-# [difftool "vscode"]
-# 	cmd = code --wait --diff $LOCAL $REMOTE
-# [mergetool "vscode"]
-#   cmd = code --wait $MERGED
 [core]
 	editor = code --wait
 	autocrlf = true
@@ -28,7 +22,3 @@
 	recurse = true
 [init]
 	defaultBranch = main
-[safe]
-	directory = C:/Users/predrag.stefanovic/winplay
-	directory = C:/Users/predrag/winplay
-	directory = C:/Users/Shadow/winplay
