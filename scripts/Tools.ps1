@@ -41,8 +41,8 @@ New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\Documents\\PowerShell\Mi
 
 #region Prompt Customization
 Write-Host "Configuring Prompt..." -ForegroundColor Yellow
-pwsh -Command { Install-Module posh-git -Scope CurrentUser -Force }
 winget install -e -h --id JanDeDobbeleer.OhMyPosh
+pwsh -Command { Install-Module posh-git -Scope CurrentUser -Force }
 #endregion
 
 #region Windows Terminal Configuration

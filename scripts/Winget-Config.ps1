@@ -8,6 +8,7 @@
 
 Write-Host "Configuring winget..." -ForegroundColor Yellow
 
+$wingetPackages = "$env:USERPROFILE\winplay\config\winget\packages.json"
 $wingetConfigSource = "$env:USERPROFILE\winplay\config\winget\settings.json"
 $wingetConfigTarget = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\settings.json"
 
@@ -16,5 +17,7 @@ if (Test-Path $wingetConfigTarget) {
 }
 
 New-Item -ItemType SymbolicLink -Path $wingetConfigTarget -Target $wingetConfigSource
+
+winget import $wingetPackages
 
 Write-Host "winget configuration complete." -ForegroundColor Green
