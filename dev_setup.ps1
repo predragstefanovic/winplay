@@ -29,6 +29,7 @@ choco install -y git --params '''/GitOnlyOnPath /NoShellIntegration /WindowsTerm
 
 RefreshEnv
 
+Write-Host "Cloning repository with scripts..."
 if (Test-Path "$env:USERPROFILE\winplay") {
     Remove-Item -Recurse -Force "$env:USERPROFILE\winplay"
 }
