@@ -35,6 +35,13 @@ if (Test-Path "$env:USERPROFILE\winplay") {
 }
 Start-Process -FilePath "git" -ArgumentList "clone", "https://github.com/predragstefanovic/winplay.git", "$env:USERPROFILE\winplay" -Wait -NoNewWindow
 
+Write-Host "Verifying clone... Listing contents of $env:USERPROFILE"
+Get-ChildItem -Path $env:USERPROFILE
+
+Write-Host "Listing contents of cloned directory..."
+Get-ChildItem -Path "$env:USERPROFILE\winplay"
+
+
 # --- Configuration Scripts ---
 . "$env:USERPROFILE\winplay\scripts\Git-Config.ps1"
 . "$env:USERPROFILE\winplay\scripts\Winget-Config.ps1"
