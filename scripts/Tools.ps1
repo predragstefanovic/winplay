@@ -22,6 +22,8 @@ winget install -e -h --id Dell.DisplayManager
 winget install -e -h --id AndreasWascher.RepoZ
 # iwr -useb get.scoop.sh | iex
 winget install -e -h --id GitHub.cli
+choco install -y python
+choco install -y sysinternals
 
 # ---------------------------------------------- #
 # Prompt  -------------------------------------- #
