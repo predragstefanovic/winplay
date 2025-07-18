@@ -119,7 +119,7 @@
                 "hidden": false,
                 "name": "PowerShell",
                 "source": "Windows.Terminal.PowershellCore",
-                "startingDirectory": "c:/dev/"
+                "startingDirectory": "c:/"
             },
             {
                 "commandline": "C:\\Program Files\\Git\\git-bash.exe",
@@ -135,7 +135,7 @@
                 "hidden": false,
                 "icon": "C:\\Program Files\\nu\\nu.ico",
                 "name": "Nushell",
-                "startingDirectory": "c:/dev/"
+                "startingDirectory": "c:/"
             },
             {
                 "guid": "{16208362-94fc-5b1f-a491-5b2624d5ab56}",
@@ -151,7 +151,7 @@
                 "hidden": true,
                 "icon": "ms-appx:///ProfileIcons/pwsh.png",
                 "name": "PowerShell Admin",
-                "startingDirectory": "c:/dev/"
+                "startingDirectory": "c:/"
             },
             {
                 "guid": "{8ab8e6f6-35c6-5b46-8419-3e1568105476}",
