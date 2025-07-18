@@ -2,9 +2,14 @@
 ## To avoid security concerns you can comment it if you prefer, otherwhise please check the software you install is safe and use this command at your own risk.
 Disable-UAC
 $Boxstarter.AutoLogin=$false
+
+# Install winget
+Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+Install-Module -Name Microsoft.WinGet.Client
+
 # Install git and clone repository containing scripts and config files
 # TODO: see how to improve install that by using chezmoi (choco install -y chezmoi)
-Install-Module -Name Microsoft.WinGet.Client
 choco install -y git --params "/GitOnlyOnPath /NoShellIntegration /WindowsTerminal"
 RefreshEnv
 git clone https://github.com/predragstefanovic/winplay.git "$env:USERPROFILE\winplay"
