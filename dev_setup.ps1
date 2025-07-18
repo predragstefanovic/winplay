@@ -45,6 +45,7 @@ Write-Host ""
 Write-Host "Clone verification successful. '$verificationFile' found."
 
 
+Write-Host "Configuring git and winget..."
 # --- Configuration Scripts ---
 . "$env:USERPROFILE\winplay\scripts\Git-Config.ps1"
 . "$env:USERPROFILE\winplay\scripts\Winget-Config.ps1"
