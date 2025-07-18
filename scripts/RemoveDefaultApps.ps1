@@ -16,8 +16,8 @@ function Remove-AppPackage {
     )
 
     Write-Output "Attempting to remove $AppName..."
-    Get-AppxPackage $AppName -AllUsers | Remove-AppxPackage -ErrorAction SilentlyContinue
-    Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -like $AppName } | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
+    	Get-AppxPackage $AppName -AllUsers | Remove-AppxPackage -AllUsers
+	Get-AppXProvisionedPackage -Online | Where DisplayName -like $AppName | Remove-AppxProvisionedPackage -Online
 }
 
 # List of applications to be removed.
