@@ -4,6 +4,7 @@ Disable-UAC
 $Boxstarter.AutoLogin=$false
 # Install git and clone repository containing scripts and config files
 # TODO: see how to improve install that by using chezmoi (choco install -y chezmoi)
+Install-Module -Name Microsoft.WinGet.Client
 choco install -y git --params "/GitOnlyOnPath /NoShellIntegration /WindowsTerminal"
 RefreshEnv
 git clone https://github.com/predragstefanovic/winplay.git "$env:USERPROFILE\winplay"
