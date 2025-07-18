@@ -13,6 +13,9 @@ A recipe is the script you run.  It calls multiple helper scripts.  These curren
 **Helper Scripts**: A helper script performs setup routines that may be useful by many recipes. Recipes call helper scripts (you don't run helper scripts directly).  The helper scripts live in the **scripts** folder
 
 ## How to run the scripts
+
+<a href='http://boxstarter.org/package/url?https://raw.githubusercontent.com/predragstefanovic/winplay/main/dev_setup.ps1'>CLICK TO START SETUP</a>
+
 Run a recipe script. You can then leave the job unattended and come back when it's finished.
 
 **Post processing steps:**  
@@ -20,4 +23,4 @@ Run a recipe script. You can then leave the job unattended and come back when it
 with a non-blank password. Use this user going forward. For more info on WSL please refer to the [documentation](https://docs.microsoft.com/en-us/windows/wsl/about).
 
 ## Known issues
-- 
+- The Boxstarter ClickOnce installer does not work when using Chrome.  This issue is being tracked [here](https://github.com/chocolatey/boxstarter/issues/345). Please use Edge to run the ClickOnce installer.
