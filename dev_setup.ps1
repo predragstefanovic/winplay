@@ -35,11 +35,14 @@ if (Test-Path "$env:USERPROFILE\winplay") {
 }
 Start-Process -FilePath "git" -ArgumentList "clone", "https://github.com/predragstefanovic/winplay.git", "$env:USERPROFILE\winplay" -Wait -NoNewWindow
 
-Write-Host "Verifying clone... Listing contents of $env:USERPROFILE"
-Get-ChildItem -Path $env:USERPROFILE
-
-Write-Host "Listing contents of cloned directory..."
-Get-ChildItem -Path "$env:USERPROFILE\winplay"
+$verificationFile = Join-Path $env:USERPROFILE "winplay\README.md"
+Write-Host "Waiting for repository clone to complete..."
+while (-not (Test-Path $verificationFile)) {
+    Start-Sleep -Seconds 2
+    Write-Host "." -NoNewline
+}
+Write-Host ""
+Write-Host "Clone verification successful. '$verificationFile' found."
 
 
 # --- Configuration Scripts ---
