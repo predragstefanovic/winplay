@@ -49,7 +49,6 @@ pwsh -Command { Install-Module posh-git -Scope CurrentUser -Force }
 Write-Host "Configuring Windows Terminal..." -ForegroundColor Yellow
 # Install Windows Terminal (Stable and Preview) and Cascadia Code Nerd Font.
 winget install -e -h --id Microsoft.WindowsTerminal
-winget install -e -h --id Microsoft.WindowsTerminalPreview
 choco install -y cascadia-code-nerd-font
 
 # Configure Windows Terminal settings and icons.
@@ -58,13 +57,6 @@ $terminalIconsPath = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsT
 Remove-Item -Path $terminalSettingsPath -Force -ErrorAction SilentlyContinue
 New-Item -ItemType SymbolicLink -Path $terminalSettingsPath -Target "$env:USERPROFILE\winplay\config\windowsTerminal\settings.json"
 Copy-Item -Path "$env:USERPROFILE\winplay\config\windowsTerminal\icons\*" -Destination $terminalIconsPath -Force
-
-# Configure Windows Terminal Preview settings and icons.
-$terminalPreviewSettingsPath = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json"
-$terminalPreviewIconsPath = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\RoamingState\"
-Remove-Item -Path $terminalPreviewSettingsPath -Force -ErrorAction SilentlyContinue
-New-Item -ItemType SymbolicLink -Path $terminalPreviewSettingsPath -Target "$env:USERPROFILE\winplay\config\windowsTerminal\settings.json"
-Copy-Item -Path "$env:USERPROFILE\winplay\config\windowsTerminal\icons\*" -Destination $terminalPreviewIconsPath -Force
 #endregion
 
 #region Azure Tools
