@@ -18,13 +18,14 @@ $Boxstarter.AutoLogin = $false
 Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelUnlock -Name AllowDevelopmentWithoutDevLicense -Value 1
 
 
-# Install winget, the Windows Package Manager.
+# Install winget if it's not already installed.
+Write-Host "Installing winget..."
 $wingetInstallScript = Join-Path $env:TEMP "winget-install.ps1"
 Invoke-RestMethod -Uri "https://github.com/asheroto/winget-install/releases/latest/download/winget-install.ps1" -OutFile $wingetInstallScript
 & $wingetInstallScript
 
-# Install Git and clone the winplay repository.
-choco install -y git --params "/GitOnlyOnPath /NoShellIntegration /WindowsTerminal"
+Write-Host "Installing Git..."
+choco install -y git --params '''/GitOnlyOnPath /NoShellIntegration /WindowsTerminal'''
 
 RefreshEnv
 
