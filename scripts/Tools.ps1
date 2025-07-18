@@ -30,18 +30,19 @@ choco install -y python
 choco install -y sysinternals
 #endregion
 
+#region PowerShell Configuration
+Write-Host "Configuring PowerShell..." -ForegroundColor Yellow
+winget install -e -h --id Microsoft.PowerShell
+RefreshEnv
+# Create a symbolic link for the PowerShell profile.
+Remove-Item -Path "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -Force -ErrorAction SilentlyContinue
+New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\Documents\\PowerShell\Microsoft.PowerShell_profile.ps1" -Target "$env:USERPROFILE\winplay\config\powerShell\Microsoft.PowerShell_profile.ps1"
+#endregion
+
 #region Prompt Customization
 Write-Host "Configuring Prompt..." -ForegroundColor Yellow
 pwsh -Command { Install-Module posh-git -Scope CurrentUser -Force }
 winget install -e -h --id JanDeDobbeleer.OhMyPosh
-#endregion
-
-#region PowerShell Configuration
-Write-Host "Configuring PowerShell..." -ForegroundColor Yellow
-winget install -e -h --id Microsoft.PowerShell
-# Create a symbolic link for the PowerShell profile.
-Remove-Item -Path "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -Force -ErrorAction SilentlyContinue
-New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\Documents\\PowerShell\Microsoft.PowerShell_profile.ps1" -Target "$env:USERPROFILE\winplay\config\powerShell\Microsoft.PowerShell_profile.ps1"
 #endregion
 
 #region Windows Terminal Configuration

@@ -7,20 +7,16 @@
     disables suggested apps in the Start Menu.
 #>
 
-Write-Host "Uninstalling default Windows applications..." -ForegroundColor Yellow
+#--- Uninstall unnecessary applications that come with Windows out of the box ---
+Write-Host "Uninstall some applications that come with Windows out of the box" -ForegroundColor "Yellow"
 
-# Function to remove a specified Appx package for all users and its provisioned package.
-function Remove-AppPackage {
-    param (
-        [string]$AppName
-    )
-
-    Write-Output "Attempting to remove $AppName..."
-    	Get-AppxPackage $AppName -AllUsers | Remove-AppxPackage -AllUsers
-	Get-AppXProvisionedPackage -Online | Where DisplayName -like $AppName | Remove-AppxProvisionedPackage -Online
+function removeApp {
+	Param ([string]$appName)
+	Write-Output "Trying to remove $appName"
+	Get-AppxPackage $appName -AllUsers | Remove-AppxPackage
+	Get-AppXProvisionedPackage -Online | Where DisplayName -like $appName | Remove-AppxProvisionedPackage -Online
 }
 
-# List of applications to be removed.
 $applicationList = @(
 	"Microsoft.BingFinance"
 	"Microsoft.3DBuilder"
@@ -34,23 +30,33 @@ $applicationList = @(
 	"Microsoft.GetHelp"
 	"Microsoft.Messaging"
 	"*Minecraft*"
+	"Microsoft.MicrosoftOfficeHub"
 	"Microsoft.OneConnect"
 	"Microsoft.WindowsPhone"
 	"Microsoft.WindowsSoundRecorder"
 	"*Solitaire*"
+	"Microsoft.MicrosoftStickyNotes"
 	"Microsoft.Office.Sway"
 	"Microsoft.XboxApp"
 	"Microsoft.XboxIdentityProvider"
+	"Microsoft.XboxGameOverlay"
+	"Microsoft.XboxGamingOverlay"
 	"Microsoft.ZuneMusic"
 	"Microsoft.ZuneVideo"
 	"Microsoft.NetworkSpeedTest"
 	"Microsoft.FreshPaint"
 	"Microsoft.Print3D"
+	"Microsoft.People*"
+	"Microsoft.Microsoft3DViewer"
+	"Microsoft.MixedReality.Portal*"
+	"*Skype*"
 	"*Autodesk*"
 	"*BubbleWitch*"
-    "king.com*"
-    "G5*"
+    	"king.com*"
+    	"G5*"
+	"*Dell*"
 	"*Facebook*"
+  "*Linkedin*"
 	"*Keeper*"
 	"*Netflix*"
 	"*Twitter*"
@@ -61,10 +67,8 @@ $applicationList = @(
 	"*.AdobePhotoshopExpress"
 );
 
-
-# Iterate over the application list and remove each app.
 foreach ($app in $applicationList) {
-    Remove-AppPackage $app
+    removeApp $app
 }
 
 # Disable suggested apps in the Start Menu.
