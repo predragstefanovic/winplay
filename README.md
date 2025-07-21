@@ -29,5 +29,5 @@ with a non-blank password. Use this user going forward. For more info on WSL ple
 TODO
 
 * replace nushel with oh-my-zsh
-* install wls2 and ubuntu, setup ubuntu, shell, git, docker, oh-my-zsh plugins
+* install wls1/2 and ubuntu, setup ubuntu, shell, git, docker, oh-my-zsh plugins
 * clean up

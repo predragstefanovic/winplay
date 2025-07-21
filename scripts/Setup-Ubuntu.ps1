@@ -21,17 +21,19 @@ $distro = "ubuntu2404"
 $distroDisplayName = "Ubuntu-24.04"
 $installerUrl = "https://wslstorestorage.blob.core.windows.net/wslblob/Ubuntu2404-240425.AppxBundle"
 
+Write-Host "Installing and configuring '$distroDisplayName'..." -ForegroundColor Yellow
+
 # --- Check if distro is already installed ---
 $existingDistros = & wsl.exe --list --quiet
 if ($existingDistros -match "^$distroDisplayName$") {
-    Write-Host "Distro '$distroDisplayName' is already installed. Skipping installation."
+    Write-Host "Distro '$distroDisplayName' is already installed. Skipping installation." -ForegroundColor Yellow
 } else {
     # --- Download and install the distro ---
     $ubuntuInstaller = Join-Path $env:TEMP "Ubuntu.appx"
     if (Test-Path $ubuntuInstaller) {
-        Write-Host "Installer already exists at $ubuntuInstaller. Skipping download."
+        Write-Host "Installer already exists at $ubuntuInstaller. Skipping download." -ForegroundColor Yellow
     } else {
-        Write-Host "Downloading Ubuntu installer..."
+        Write-Host "Downloading Ubuntu installer..." -ForegroundColor Yellow
         Invoke-WebRequest -Uri $installerUrl -OutFile $ubuntuInstaller -UseBasicParsing
     }
 
@@ -41,9 +43,11 @@ if ($existingDistros -match "^$distroDisplayName$") {
     RefreshEnv
 
     # Install the distro in root mode (non-interactive setup)
-    Write-Host "Installing Ubuntu distro..."
+    Write-Host "Installing Ubuntu distro..." -ForegroundColor Yellow
     & $distro install --root
     if ($LASTEXITCODE -ne 0) { throw "Could not install distro." }
+
+    Write-Host "Distro '$distroDisplayName' install completed." -ForegroundColor Yellow
 }
 
 
@@ -52,24 +56,23 @@ if ($existingDistros -match "^$distroDisplayName$") {
 # Using --root means all WSL sessions run as root by default.
 # We need to create a non-root user manually.
 # Reference: https://github.com/microsoft/WSL/issues/3369
-Write-Host "Checking if user '$username' already exists..."
 & $distro run id "$username"
 if ($LASTEXITCODE -eq 0) {
-    Write-Host "User '$username' already exists. Skipping user setup."
+    Write-Host "User '$username' already exists. Skipping user setup." -ForegroundColor Yellow
 } else {
-    Write-Host "Creating user '$username'..."
+    Write-Host "Creating user '$username'..." -ForegroundColor Yellow
     & $distro run useradd -m "$username"
     if ($LASTEXITCODE -ne 0) { throw "User creation failed." }
 
-    Write-Host "Setting password for '$username'..."
+    Write-Host "Setting password for '$username'..." -ForegroundColor Yellow
     & $distro run "chpasswd <<< ${username}:${password}"
     if ($LASTEXITCODE -ne 0) { throw "Password setting failed." }
 
-    Write-Host "Setting default shell to bash..."
+    Write-Host "Setting default shell to bash..." -ForegroundColor Yellow
     & $distro run chsh -s /bin/bash "$username"
     if ($LASTEXITCODE -ne 0) { throw "Shell change failed." }
 
-    Write-Host "Adding user to standard groups (sudo, etc.)..."
+    Write-Host "Adding user to standard groups (sudo, etc.)..." -ForegroundColor Yellow
     & $distro run usermod -aG adm,cdrom,sudo,dip,plugdev "$username"
     if ($LASTEXITCODE -ne 0) { throw "Group assignment failed." }
 }
@@ -79,14 +82,14 @@ if ($LASTEXITCODE -eq 0) {
 $env:DEBIAN_FRONTEND = "noninteractive"
 $env:WSLENV += ":DEBIAN_FRONTEND"
 
-Write-Host "Running system update and cleanup..."
+Write-Host "Running '$distroDisplayName' update and cleanup..." -ForegroundColor Yellow
 & $distro run apt-get update
 if ($LASTEXITCODE -ne 0) { throw "apt-get update failed." }
 
 & $distro run apt-get full-upgrade -y
 if ($LASTEXITCODE -ne 0) {
     # after WSL1 install, upgrade fails and requires a manual fix: https://superuser.com/questions/1803992/getting-this-error-failed-to-take-etc-passwd-lock-invalid-argument
-    Write-Host "Detected errors while upgrading, trying to self-heal..."
+    Write-Host "Detected errors while upgrading, trying to self-heal..." -ForegroundColor Yellow
     & $distro run mv /var/lib/dpkg/info /var/lib/dpkg/info_silent
     if ($LASTEXITCODE -ne 0) { throw "apt-get upgrade-fix failed." }
 
@@ -113,7 +116,7 @@ if ($LASTEXITCODE -ne 0) {
 
     & $distro run apt-get full-upgrade -y
     if ($LASTEXITCODE -ne 0) { throw "apt-get upgrade-fix failed." }
-    Write-Host "Self-healing success..."
+    Write-Host "Self-healing success..." -ForegroundColor Yellow
 }
 
 & $distro run apt-get autoremove -y
@@ -129,3 +132,8 @@ if ($LASTEXITCODE -ne 0) { throw "WSL termination failed." }
 # Set the created user as default for future WSL sessions
 & $distro config --default-user "$username"
 if ($LASTEXITCODE -ne 0) { throw "Setting default user failed." }
+
+net use L: '\\wsl$\Ubuntu' /persistent:yes
+if ($LASTEXITCODE -ne 0) { throw "Unable to mount wsl network drive." }
+
+Write-Host "'$distroDisplayName' installation and configuration completed." -ForegroundColor Green
