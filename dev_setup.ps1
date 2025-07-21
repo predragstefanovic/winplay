@@ -48,6 +48,8 @@ Write-Host "Configuring git and winget..."
 . "$env:USERPROFILE\winplay\scripts\Winget-Config.ps1"
 
 # --- Setup Scripts ---
+. "$env:USERPROFILE\winplay\scripts\WSL.ps1"
+. "$env:USERPROFILE\winplay\scripts\Setup-Ubuntu.ps1"
 . "$env:USERPROFILE\winplay\scripts\FileExplorerSettings.ps1"
 . "$env:USERPROFILE\winplay\scripts\RemoveDefaultApps.ps1"
 . "$env:USERPROFILE\winplay\scripts\Tools.ps1"
