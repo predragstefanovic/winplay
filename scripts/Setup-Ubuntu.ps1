@@ -86,6 +86,7 @@ if ($LASTEXITCODE -ne 0) { throw "apt-get update failed." }
 & $distro run apt-get full-upgrade -y
 if ($LASTEXITCODE -ne 0) {
     # after WSL1 install, upgrade fails and requires a manual fix: https://superuser.com/questions/1803992/getting-this-error-failed-to-take-etc-passwd-lock-invalid-argument
+    Write-Host "Detected errors while upgrading, trying to self-heal..."
     & $distro run mv /var/lib/dpkg/info /var/lib/dpkg/info_silent
     if ($LASTEXITCODE -ne 0) { throw "apt-get upgrade-fix failed." }
 
@@ -112,6 +113,7 @@ if ($LASTEXITCODE -ne 0) {
 
     & $distro run apt-get full-upgrade -y
     if ($LASTEXITCODE -ne 0) { throw "apt-get upgrade-fix failed." }
+    Write-Host "Self-healing success..."
 }
 
 & $distro run apt-get autoremove -y
