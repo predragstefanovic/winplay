@@ -62,7 +62,7 @@ if ($LASTEXITCODE -eq 0) {
     if ($LASTEXITCODE -ne 0) { throw "User creation failed." }
 
     Write-Host "Setting password for '$username'..."
-    & $distro run sh -c 'echo "${username}:${password}" | chpasswd'  # piping requires a shell
+    & $distro run "chpasswd <<< "$username:$password"
     if ($LASTEXITCODE -ne 0) { throw "Password setting failed." }
 
     Write-Host "Setting default shell to bash..."
