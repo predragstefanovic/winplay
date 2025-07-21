@@ -27,9 +27,14 @@ if ($existingDistros -match "^$distroDisplayName$") {
     Write-Host "Distro '$distroDisplayName' is already installed. Skipping installation."
 } else {
     # --- Download and install the distro ---
-    Write-Host "Downloading Ubuntu distro..."
     $ubuntuInstaller = Join-Path $env:TEMP "Ubuntu.appx"
-    Invoke-WebRequest -Uri $installerUrl -OutFile $ubuntuInstaller -UseBasicParsing
+    if (Test-Path $ubuntuInstaller) {
+        Write-Host "Installer already exists at $ubuntuInstaller. Skipping download."
+    } else {
+        Write-Host "Downloading Ubuntu installer..."
+        Invoke-WebRequest -Uri $installerUrl -OutFile $ubuntuInstaller -UseBasicParsing
+    }
+
     Add-AppxPackage -Path $ubuntuInstaller
 
     # Make sure updated environment variables (e.g., new PATH) are available
