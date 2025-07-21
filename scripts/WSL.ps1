@@ -18,6 +18,6 @@ Invoke-RestMethod -Uri "https://wslstorestorage.blob.core.windows.net/wslblob/ws
 Start-Process msiexec.exe -Wait -ArgumentList "/I $wslKernelUpdatePackage /quiet"
 
 
-# Set WSL2 as the default version
-Write-Host "Setting WSL2 as the default version..."
-wsl --set-default-version 2
+# Set WSL1 as the default version
+Write-Host "Setting WSL1 as the default version..."
+wsl --set-default-version 1
