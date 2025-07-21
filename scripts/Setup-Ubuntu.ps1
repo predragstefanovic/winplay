@@ -84,7 +84,35 @@ Write-Host "Running system update and cleanup..."
 if ($LASTEXITCODE -ne 0) { throw "apt-get update failed." }
 
 & $distro run apt-get full-upgrade -y
-if ($LASTEXITCODE -ne 0) { throw "apt-get upgrade failed." }
+if ($LASTEXITCODE -ne 0) {
+    # after WSL1 install, upgrade fails and requires a manual fix: https://superuser.com/questions/1803992/getting-this-error-failed-to-take-etc-passwd-lock-invalid-argument
+    & $distro run mv /var/lib/dpkg/info /var/lib/dpkg/info_silent
+    if ($LASTEXITCODE -ne 0) { throw "apt-get upgrade-fix failed." }
+
+    & $distro run mkdir /var/lib/dpkg/info
+    if ($LASTEXITCODE -ne 0) { throw "apt-get upgrade-fix failed." }
+
+    & $distro run apt-get update
+    if ($LASTEXITCODE -ne 0) { throw "apt-get upgrade-fix failed." }
+
+    & $distro run apt-get -f install
+    if ($LASTEXITCODE -ne 0) { throw "apt-get upgrade-fix failed." }
+
+    & $distro run mv /var/lib/dpkg/info/* /var/lib/dpkg/info_silent
+    if ($LASTEXITCODE -ne 0) { throw "apt-get upgrade-fix failed." }
+
+    & $distro run rm -rf /var/lib/dpkg/info
+    if ($LASTEXITCODE -ne 0) { throw "apt-get upgrade-fix failed." }
+
+    & $distro run mv /var/lib/dpkg/info_silent /var/lib/dpkg/info
+    if ($LASTEXITCODE -ne 0) { throw "apt-get upgrade-fix failed." }
+
+    & $distro run apt-get update
+    if ($LASTEXITCODE -ne 0) { throw "apt-get upgrade-fix failed." }
+
+    & $distro run apt-get full-upgrade -y
+    if ($LASTEXITCODE -ne 0) { throw "apt-get upgrade-fix failed." }
+}
 
 & $distro run apt-get autoremove -y
 if ($LASTEXITCODE -ne 0) { throw "autoremove failed." }
