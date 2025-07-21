@@ -27,7 +27,7 @@ if ($existingDistros -match "^$distroDisplayName$") {
     Write-Host "Distro '$distroDisplayName' is already installed. Skipping installation."
 } else {
     # --- Download and install the distro ---
-    Write-Host "Downloading and installing Ubuntu distro..."
+    Write-Host "Downloading Ubuntu distro..."
     $ubuntuInstaller = Join-Path $env:TEMP "Ubuntu.appx"
     Invoke-WebRequest -Uri $installerUrl -OutFile $ubuntuInstaller -UseBasicParsing
     Add-AppxPackage -Path $ubuntuInstaller
@@ -36,6 +36,7 @@ if ($existingDistros -match "^$distroDisplayName$") {
     RefreshEnv
 
     # Install the distro in root mode (non-interactive setup)
+    Write-Host "Installing Ubuntu distro..."
     & $distro install --root
     if ($LASTEXITCODE -ne 0) { throw "Could not install distro." }
 }
