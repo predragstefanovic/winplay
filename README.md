@@ -24,6 +24,7 @@ with a non-blank password. Use this user going forward. For more info on WSL ple
 
 ## Known issues
 - The Boxstarter ClickOnce installer does not work when using Chrome.  This issue is being tracked [here](https://github.com/chocolatey/boxstarter/issues/345). Please use Edge to run the ClickOnce installer.
+- WSL1 is used, since WSL2 requires enabling Virtualization in BIOS. There is a single line change to use WSL2 as default in the wsl.ps1 script
 
 
 TODO
