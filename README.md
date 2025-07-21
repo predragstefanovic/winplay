@@ -1,6 +1,8 @@
-source: https://github.com/microsoft/windows-dev-box-setup-scripts/blob/master/README.md
+source: https://github.com/microsoft/windows-dev-box-setup-scripts/
 
 source: https://github.com/TechWatching/dotfiles/tree/main
+
+source: https://github.com/Vets-Who-Code/windows-dev-guide
 
 (manual forking)
 
@@ -28,6 +30,8 @@ with a non-blank password. Use this user going forward. For more info on WSL ple
 
 TODO
 
-* replace nushel with oh-my-zsh
-* install wls1/2 and ubuntu, setup ubuntu, shell, git, docker, oh-my-zsh plugins
-* clean up
+* DONE install wls1/2 and ubuntu, setup ubuntu
+* IN PROGRESS windows terminal, oh-my-zsh, oh-my-zsh plugins, profile setup
+* PENDING docker installation for wsl1/2
+* PENDING other utilities to install, cover (lists of extensios for code, tools for win and ubuntu)
+* PENDING clean up
