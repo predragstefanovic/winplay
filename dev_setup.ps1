@@ -12,7 +12,10 @@
 # UAC will be re-enabled at the end of the script.
 # WARNING: Disabling UAC can be a security risk. Review the installed software to ensure it is safe.
 Disable-UAC
-$Boxstarter.AutoLogin = $false
+$Boxstarter.RebootOk=$true
+$Boxstarter.NoPassword=$false
+$Boxstarter.AutoLogin=$true
+
 
 # Enable Developer Mode on the system.
 Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelUnlock -Name AllowDevelopmentWithoutDevLicense -Value 1
