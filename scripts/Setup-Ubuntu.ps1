@@ -24,6 +24,7 @@ $installerUrl = "https://wslstorestorage.blob.core.windows.net/wslblob/Ubuntu240
 Write-Host "Installing and configuring '$distroDisplayName'..." -ForegroundColor Yellow
 
 # --- Check if distro is already installed ---
+wsl.exe --list --quiet
 $existingDistros = & wsl.exe --list --quiet
 if ($existingDistros -match "^$distroDisplayName$") {
     Write-Host "Distro '$distroDisplayName' is already installed. Skipping installation." -ForegroundColor Yellow
