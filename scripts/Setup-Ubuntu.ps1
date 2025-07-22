@@ -25,7 +25,8 @@ Write-Host "Installing and configuring '$distroDisplayName'..." -ForegroundColor
 
 # --- Check if distro is already installed ---
 wsl.exe --list --quiet
-$existingDistros = & wsl.exe --list --quiet
+$existingDistrosUNI = & wsl.exe --list --quiet
+$existringDistros = $existingDistrosUNI -replace "\x00",""
 if ($existingDistros -match "^$distroDisplayName$") {
     Write-Host "Distro '$distroDisplayName' is already installed. Skipping installation." -ForegroundColor Yellow
 } else {
