@@ -155,6 +155,8 @@ if ($LASTEXITCODE -ne 0) { throw "failed to install gh cli." }
 if ($LASTEXITCODE -ne 0) { throw "failed to install zsh." }
 
 # fzf
+& $distro run "rm -rf ~/.fzf"
+if ($LASTEXITCODE -ne 0) { throw "failed to clean up old fzf installation." }
 & $distro run "git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf"
 if ($LASTEXITCODE -ne 0) { throw "failed to clone fzf." }
 & $distro run "~/.fzf/install --all"
