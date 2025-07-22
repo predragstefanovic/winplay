@@ -25,7 +25,10 @@ function Get-WindowsFeatureState {
 # Enable required system features
 Write-Host "Enabling system features to run WSL..." -ForegroundColor Yellow
 $wslEnabledBefore = Get-WindowsFeatureState "Microsoft-Windows-Subsystem-Linux"
+
 choco install -y Microsoft-Windows-Subsystem-Linux --source="'windowsfeatures'"
+RefreshEnv
+
 $wslEnabledAfter = Get-WindowsFeatureState "Microsoft-Windows-Subsystem-Linux"
 
 if ($wslEnabledBefore -ne $wslEnabledAfter) {
