@@ -83,48 +83,49 @@ if ($LASTEXITCODE -eq 0) {
 # Setting DEBIAN_FRONTEND avoids interactive prompts during apt operations
 $env:DEBIAN_FRONTEND = "noninteractive"
 $env:WSLENV += ":DEBIAN_FRONTEND"
+& $distro run "sudo -S <<< ${password} su ${username}"
 
 Write-Host "Running '$distroDisplayName' update and cleanup..." -ForegroundColor Yellow
-& $distro run apt-get update
+& $distro run "sudo -S <<< ${password} apt-get update"
 if ($LASTEXITCODE -ne 0) { throw "apt-get update failed." }
 
-& $distro run apt-get full-upgrade -y
+& $distro run "sudo -S <<< ${password} apt-get full-upgrade -y"
 if ($LASTEXITCODE -ne 0) {
     # after WSL1 install, upgrade fails and requires a manual fix: https://superuser.com/questions/1803992/getting-this-error-failed-to-take-etc-passwd-lock-invalid-argument
     Write-Host "Detected errors while upgrading, trying to self-heal..." -ForegroundColor Yellow
-    & $distro run mv /var/lib/dpkg/info /var/lib/dpkg/info_silent
+    & $distro run "sudo -S <<< ${password} mv /var/lib/dpkg/info /var/lib/dpkg/info_silent"
     if ($LASTEXITCODE -ne 0) { throw "apt-get upgrade-fix failed." }
 
-    & $distro run mkdir /var/lib/dpkg/info
+    & $distro run "sudo -S <<< ${password} mkdir /var/lib/dpkg/info"
     if ($LASTEXITCODE -ne 0) { throw "apt-get upgrade-fix failed." }
 
-    & $distro run apt-get update
+    & $distro run "sudo -S <<< ${password} apt-get update"
     if ($LASTEXITCODE -ne 0) { throw "apt-get upgrade-fix failed." }
 
-    & $distro run apt-get -f install
+    & $distro run "sudo -S <<< ${password} apt-get -f install"
     if ($LASTEXITCODE -ne 0) { throw "apt-get upgrade-fix failed." }
 
-    & $distro run mv /var/lib/dpkg/info/* /var/lib/dpkg/info_silent
+    & $distro run "sudo -S <<< ${password} mv /var/lib/dpkg/info/* /var/lib/dpkg/info_silent"
     if ($LASTEXITCODE -ne 0) { throw "apt-get upgrade-fix failed." }
 
-    & $distro run rm -rf /var/lib/dpkg/info
+    & $distro run "sudo -S <<< ${password} rm -rf /var/lib/dpkg/info"
     if ($LASTEXITCODE -ne 0) { throw "apt-get upgrade-fix failed." }
 
-    & $distro run mv /var/lib/dpkg/info_silent /var/lib/dpkg/info
+    & $distro run "sudo -S <<< ${password} mv /var/lib/dpkg/info_silent /var/lib/dpkg/info"
     if ($LASTEXITCODE -ne 0) { throw "apt-get upgrade-fix failed." }
 
-    & $distro run apt-get update
+    & $distro run "sudo -S <<< ${password} apt-get update"
     if ($LASTEXITCODE -ne 0) { throw "apt-get upgrade-fix failed." }
 
-    & $distro run apt-get full-upgrade -y
+    & $distro run "sudo -S <<< ${password} apt-get full-upgrade -y"
     if ($LASTEXITCODE -ne 0) { throw "apt-get upgrade-fix failed." }
     Write-Host "Self-healing success..." -ForegroundColor Yellow
 }
 
-& $distro run apt-get autoremove -y
+& $distro run "sudo -S <<< ${password} apt-get autoremove -y"
 if ($LASTEXITCODE -ne 0) { throw "autoremove failed." }
 
-& $distro run apt-get autoclean
+& $distro run "sudo -S <<< ${password} apt-get autoclean"
 if ($LASTEXITCODE -ne 0) { throw "autoclean failed." }
 
 # Terminate WSL instance instead of rebooting the whole machine
