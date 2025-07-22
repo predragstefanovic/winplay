@@ -66,7 +66,5 @@ You can double-check any of your settings by typing `git config --global user.na
 
 TODO
 
-* DONE install wls1/2 and ubuntu, setup ubuntu
-* IN PROGRESS windows terminal, oh-my-zsh, oh-my-zsh plugins, profile setup
 * OPEN docker installation for wsl1/2
 * OPEN clean up
