@@ -70,7 +70,7 @@ choco install -y python
 
 #region Azure Tools
 Write-Host "Installing Azure Tools..." -ForegroundColor Yellow
-winget install -e -h --id Microsoft.AzureCLI --all --accept-source-agreements --accept-package-agreements
+winget install -e -h --id Microsoft.AzureCLI --accept-source-agreements --accept-package-agreements
 # winget install -e -h --id Microsoft.AzureCosmosEmulator
 # winget install -e -h --id Microsoft.AzureDataStudio
 # winget install -e -h --id Microsoft.azure-iot-explorer
