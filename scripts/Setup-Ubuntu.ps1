@@ -154,6 +154,12 @@ if ($LASTEXITCODE -ne 0) { throw "failed to install gh cli." }
 & $distro run "sudo -S <<< ${password} apt install zsh -y"
 if ($LASTEXITCODE -ne 0) { throw "failed to install zsh." }
 
+# profile settings for zshrc and fzf
+& $distro run "curl -fsSL https://raw.githubusercontent.com/predragstefanovic/winplay/refs/heads/main/config/zsh/.zshrc -o ~/.zshrc"
+if ($LASTEXITCODE -ne 0) { throw "failed to install oh my zsh profile settings." }
+& $distro run "curl -fsSL https://raw.githubusercontent.com/predragstefanovic/winplay/refs/heads/main/config/zsh/.fzf.zsh -o ~/.fzf.zsh"
+if ($LASTEXITCODE -ne 0) { throw "failed to install oh my fzf settings." }
+
 # fzf
 $foundFzf = & $distro run "source ~/.zshrc &> /dev/null; type fzf"
 if ($foundFzf -match "fzf not found") {
@@ -179,12 +185,6 @@ if ($foundOmz -match "omz not found") {
     & $distro run "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
     if ($LASTEXITCODE -ne 0) { throw "failed to install zsh-syntax-highlighting plugin." }
 }
-
-# profile settings for zshrc and fzf
-& $distro run "curl -fsSL https://raw.githubusercontent.com/predragstefanovic/winplay/refs/heads/main/config/zsh/.zshrc -o ~/.zshrc"
-if ($LASTEXITCODE -ne 0) { throw "failed to install oh my zsh profile settings." }
-& $distro run "curl -fsSL https://raw.githubusercontent.com/predragstefanovic/winplay/refs/heads/main/config/zsh/.fzf.zsh -o ~/.fzf.zsh"
-if ($LASTEXITCODE -ne 0) { throw "failed to install oh my fzf settings." }
 
 # activate zsh to be the default shell
 & $distro run "sudo -S <<< ${password} chsh -s /usr/bin/zsh $username"
