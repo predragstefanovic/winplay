@@ -77,13 +77,24 @@ if ($LASTEXITCODE -eq 0) {
     Write-Host "Adding user to standard groups (sudo, etc.)..." -ForegroundColor Yellow
     & $distro run usermod -aG adm,cdrom,sudo,dip,plugdev "$username"
     if ($LASTEXITCODE -ne 0) { throw "Group assignment failed." }
+
+    # Set the created user as default for future WSL sessions
+    & $distro config --default-user "$username"
+    if ($LASTEXITCODE -ne 0) { throw "Setting default user failed." }
 }
 
 # --- Perform system update and cleanup ---
 # Setting DEBIAN_FRONTEND avoids interactive prompts during apt operations
 $env:DEBIAN_FRONTEND = "noninteractive"
 $env:WSLENV += ":DEBIAN_FRONTEND"
-& $distro run "sudo -S <<< ${password} su ${username}"
+
+$defaultUser = & $distro run whoami
+if ($defaultUser -match "root") {
+    Write-Host "Switching to user '$username' to finish the ubuntu setup..." -ForegroundColor Yellow
+    & $distro run "su ${username}"
+    if ($LASTEXITCODE -ne 0) { throw "Unable to switch out from root user." }
+}
+
 
 Write-Host "Running '$distroDisplayName' update and cleanup..." -ForegroundColor Yellow
 & $distro run "sudo -S <<< ${password} apt-get update"
@@ -131,9 +142,5 @@ if ($LASTEXITCODE -ne 0) { throw "autoclean failed." }
 # Terminate WSL instance instead of rebooting the whole machine
 wsl --terminate $distroDisplayName
 if ($LASTEXITCODE -ne 0) { throw "WSL termination failed." }
-
-# Set the created user as default for future WSL sessions
-& $distro config --default-user "$username"
-if ($LASTEXITCODE -ne 0) { throw "Setting default user failed." }
 
 Write-Host "'$distroDisplayName' installation and configuration completed." -ForegroundColor Green

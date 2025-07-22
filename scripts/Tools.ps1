@@ -15,15 +15,14 @@ choco install -y googlechrome
 #region Common Tools
 Write-Host "Installing Common Tools..." -ForegroundColor Yellow
 choco install -y 7zip
-winget install -e -h --id JohnMacFarlane.Pandoc
-winget install -e -h --id Microsoft.Whiteboard -s msstore
-winget install -e -h --id Microsoft.PowerToys # Note: Settings for PowerToys should be synced separately.
+winget install -e -h --id JohnMacFarlane.Pandoc --all --accept-source-agreements --accept-package-agreements
+winget install -e -h --id Microsoft.PowerToys --all --accept-source-agreements --accept-package-agreements # Note: Settings for PowerToys should be synced separately.
 #endregion
 
 #region Development Tools
 Write-Host "Installing Development Tools..." -ForegroundColor Yellow
-winget install -e -h --id AndreasWascher.RepoZ
-winget install -e -h --id GitHub.cli
+winget install -e -h --id AndreasWascher.RepoZ --all --accept-source-agreements --accept-package-agreements
+winget install -e -h --id GitHub.cli --all --accept-source-agreements --accept-package-agreements
 choco install -y python
 #endregion
 
@@ -71,7 +70,7 @@ choco install -y python
 
 #region Azure Tools
 Write-Host "Installing Azure Tools..." -ForegroundColor Yellow
-winget install -e -h --id Microsoft.AzureCLI
+winget install -e -h --id Microsoft.AzureCLI --all --accept-source-agreements --accept-package-agreements
 # winget install -e -h --id Microsoft.AzureCosmosEmulator
 # winget install -e -h --id Microsoft.AzureDataStudio
 # winget install -e -h --id Microsoft.azure-iot-explorer
