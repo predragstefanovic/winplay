@@ -1,9 +1,8 @@
 # If you come from bash you might have to change your $PATH.
-export GOPATH=$HOME/go
-# export GOBIN=/usr/local/go/bin
-export GOBIN=$HOME/sdk/go1.22.1/bin
+# export GOPATH=$HOME/go
+# export GOBIN=$HOME/sdk/go1.22.1/bin
 
-export PATH=$HOME/bin:/usr/local/bin:$GOBIN:$GOPATH/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$GOBIN:$GOPATH/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -117,3 +116,6 @@ zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
 # loading up cmd calculator
 autoload -Uz zcalc
+
+# init oh-my-posh theme engine with zsh
+eval "$(oh-my-posh init zsh --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/jandedobbeleer.omp.json)"

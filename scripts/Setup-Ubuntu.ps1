@@ -144,6 +144,10 @@ Write-Host "Installing common Ubuntu tools curl, git, gh cli, zsh, oh-my-zsh, na
 & $distro run "sudo -S <<< ${password} apt install curl -y"
 if ($LASTEXITCODE -ne 0) { throw "failed to install gh cli." }
 
+# unzip
+& $distro run "sudo -S <<< ${password} apt-get install unzip -y"
+if ($LASTEXITCODE -ne 0) { throw "failed to install unzip." }
+
 # git and gh cli
 & $distro run "sudo -S <<< ${password} apt install git -y"
 if ($LASTEXITCODE -ne 0) { throw "failed to install git." }
@@ -159,6 +163,10 @@ if ($LASTEXITCODE -ne 0) { throw "failed to install zsh." }
 if ($LASTEXITCODE -ne 0) { throw "failed to install oh my zsh profile settings." }
 & $distro run "curl -fsSL https://raw.githubusercontent.com/predragstefanovic/winplay/refs/heads/main/config/zsh/.fzf.zsh -o ~/.fzf.zsh"
 if ($LASTEXITCODE -ne 0) { throw "failed to install oh my fzf settings." }
+
+# oh-my-posh theme engine
+& $distro run "curl -s https://ohmyposh.dev/install.sh | bash -s"
+if ($LASTEXITCODE -ne 0) { throw "failed to install oh my posh theme engine." }
 
 # fzf
 $foundFzf = & $distro run "source ~/.zshrc &> /dev/null; type fzf"
