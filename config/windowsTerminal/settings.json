@@ -21,7 +21,17 @@
                 "elevate": false,
                 "hidden": false,
                 "source": "Windows.Terminal.PowershellCore",
+                "backgroundImageOpacity": 0.1,
                 "startingDirectory": "c:/"
+            },
+            {
+                "guid": "{8ab8e6f6-35c6-5b46-8419-3e1568105476}",
+                "name": "Ubuntu 24.04",
+                "hidden": false,
+                "backgroundImage": "ms-appdata:///roaming/OS_Ubuntu.png",
+                "backgroundImageOpacity": 0.1,
+                "backgroundImageStretchMode": "none",
+                "source": "Windows.Terminal.Wsl"
             },
             {
                 "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
@@ -29,7 +39,6 @@
                 "backgroundImage": "ms-appdata:///roaming/Azure.png",
                 "backgroundImageOpacity": 0.3,
                 "backgroundImageStretchMode": "none",
-                "colorScheme": "Solarized Dark",
                 "hidden": false,
                 "source": "Windows.Terminal.Azure"
             }

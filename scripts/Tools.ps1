@@ -28,10 +28,8 @@ choco install -y vscode
 winget install -e -h --id JetBrains.Toolbox
 #endregion
 
-
-
 #region Windows Terminal Configuration
-Write-Host "Configuring PowerShell, Windows Terminal and Oh-My-Posh......" -ForegroundColor Yellow
+Write-Host "Configuring PowerShell, Windows Terminal and Oh-My-Posh..." -ForegroundColor Yellow
 # Install Windows Terminal (Stable and Preview) and Cascadia Code Nerd Font.
 winget install -e -h --id Microsoft.PowerShell
 winget install -e -h --id Microsoft.WindowsTerminal
@@ -53,9 +51,6 @@ Remove-Item -Path $terminalSettingsPath -Force -ErrorAction SilentlyContinue
 New-Item -ItemType SymbolicLink -Path $terminalSettingsPath -Target "$env:USERPROFILE\winplay\config\windowsTerminal\settings.json"
 Copy-Item -Path "$env:USERPROFILE\winplay\config\windowsTerminal\icons\*" -Destination $terminalIconsPath -Force
 #endregion
-
-# TODO: replace with windows terminal and ohmyzsh setup
-
 
 #region Azure Tools
 Write-Host "Installing Azure Tools..." -ForegroundColor Yellow

@@ -139,6 +139,48 @@ if ($LASTEXITCODE -ne 0) { throw "autoremove failed." }
 & $distro run "sudo -S <<< ${password} apt-get autoclean"
 if ($LASTEXITCODE -ne 0) { throw "autoclean failed." }
 
+Write-Host "Installing common Ubuntu tools curl, git, gh cli, zsh, oh-my-zsh, nano, bat, jq..." -ForegroundColor Yellow
+# curl
+& $distro run "sudo -S <<< ${password} apt install curl -y"
+if ($LASTEXITCODE -ne 0) { throw "failed to install gh cli." }
+
+# git and gh cli
+& $distro run "sudo -S <<< ${password} apt install git -y"
+if ($LASTEXITCODE -ne 0) { throw "failed to install git." }
+& $distro run "sudo -S <<< ${password} apt install gh -y"
+if ($LASTEXITCODE -ne 0) { throw "failed to install gh cli." }
+
+# zsh
+& $distro run "sudo -S <<< ${password} apt install zsh -y"
+if ($LASTEXITCODE -ne 0) { throw "failed to install zsh." }
+
+# fzf
+& $distro run "sudo -S <<< ${password} apt install fzf -y"
+if ($LASTEXITCODE -ne 0) { throw "failed to install fzf." }
+
+# oh-my-zsh
+& $distro run "sh -c 'curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh'"
+if ($LASTEXITCODE -ne 0) { throw "failed to install oh my zsh." }
+
+# profile settings for zshrc and fzf
+& $distro run "curl -fsSL https://raw.githubusercontent.com/predragstefanovic/winplay/refs/heads/main/config/zsh/.zshrc -o ~/.zshrc"
+if ($LASTEXITCODE -ne 0) { throw "failed to install oh my zsh profile settings." }
+& $distro run "curl -fsSL https://raw.githubusercontent.com/predragstefanovic/winplay/refs/heads/main/config/zsh/.fzf.zsh -o ~/.fzf.zsh"
+if ($LASTEXITCODE -ne 0) { throw "failed to install oh my fzf settings." }
+
+# nano
+& $distro run "sudo -S <<< ${password} apt install nano -y"
+if ($LASTEXITCODE -ne 0) { throw "failed to install nano." }
+
+# bat
+& $distro run "sudo -S <<< ${password} apt install bat -y"
+if ($LASTEXITCODE -ne 0) { throw "failed to install bat." }
+
+# jq
+& $distro run "sudo -S <<< ${password} apt-get install jq -y"
+if ($LASTEXITCODE -ne 0) { throw "failed to install jq." }
+
+
 # Terminate WSL instance instead of rebooting the whole machine
 wsl --terminate $distroDisplayName
 if ($LASTEXITCODE -ne 0) { throw "WSL termination failed." }

@@ -20,17 +20,53 @@ A recipe is the script you run. It calls multiple helper scripts. These currentl
 
 Run a recipe script. You can then leave the job unattended and come back when it's finished.
 
-**Post processing steps:**  
-1. nothing for now
-
 ## Known issues
 - The Boxstarter ClickOnce installer does not work when using Chrome.  This issue is being tracked [here](https://github.com/chocolatey/boxstarter/issues/345). Please use Edge to run the ClickOnce installer.
 - WSL1 is used, since WSL2 requires enabling Virtualization in BIOS. There is a single line change to use WSL2 as default in the wsl.ps1 script
+
+## Post processing steps
+
+### WSL - Ubuntu
+
+Change the password for the default user. Open a WSL command line and type:
+
+```sh
+passwd
+```
+
+### Git
+
+#### Name
+
+To set up your Git config file, open a WSL command line and set your name with this command (replacing "Your Name" with your preferred username):
+
+```sh
+git config --global user.name "Your Name"
+```
+
+### Email
+
+Set your email with this command (replacing "youremail@domain.com" with the email you prefer):
+
+```sh
+git config --global user.email "youremail@domain.com"
+```
+
+### Username
+
+And finally, add your GitHub username to link it to git (case sensitive!):
+
+```sh
+git config --global user.username "GitHub username"
+```
+
+Make sure you are inputting `user.username` and not `user.name` otherwise, you will overwrite your name and you will not be correctly synced to your GitHub account.
+
+You can double-check any of your settings by typing `git config --global user.name` and so on. To make any changes just type the necessary command again as in the examples above.
 
 TODO
 
 * DONE install wls1/2 and ubuntu, setup ubuntu
 * IN PROGRESS windows terminal, oh-my-zsh, oh-my-zsh plugins, profile setup
-* PENDING docker installation for wsl1/2
-* PENDING other utilities to install, cover (lists of extensios for code, tools for win and ubuntu)
-* PENDING clean up
+* OPEN docker installation for wsl1/2
+* OPEN clean up
