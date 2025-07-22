@@ -16,6 +16,14 @@
         "list": 
         [
             {
+                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+                "name": "PowerShell",
+                "elevate": false,
+                "hidden": false,
+                "source": "Windows.Terminal.PowershellCore",
+                "startingDirectory": "c:/"
+            },
+            {
                 "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
                 "name": "Azure Cloud Shell",
                 "backgroundImage": "ms-appdata:///roaming/Azure.png",
@@ -24,106 +32,10 @@
                 "colorScheme": "Solarized Dark",
                 "hidden": false,
                 "source": "Windows.Terminal.Azure"
-            },
-            {
-                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-                "name": "PowerShell",
-                "colorScheme": "Cobalt2",
-                "elevate": false,
-                "hidden": false,
-                "source": "Windows.Terminal.PowershellCore",
-                "startingDirectory": "c:/"
-            },
-            {
-                "guid": "{230ffdd3-2470-4e3e-ad47-d726eb792eb3}",
-                "colorScheme": "Cobalt2",
-                "name": "PowerShell Admin",
-                "commandline": "pwsh",
-                "elevate": true,
-                "hidden": true,
-                "icon": "ms-appx:///ProfileIcons/pwsh.png",
-                "startingDirectory": "c:/"
-            },
-            {
-                "guid": "{8ab8e6f6-35c6-5b46-8419-3e1568105476}",
-                "name": "Ubuntu",
-                "hidden": false,
-                "source": "Windows.Terminal.Wsl"
-            },
+            }
         ]
     },
-    "schemes": 
-    [
-        {
-            "background": "#193549",
-            "black": "#000000",
-            "blue": "#1478DB",
-            "brightBlack": "#808080",
-            "brightBlue": "#1478DB",
-            "brightCyan": "#00FFFF",
-            "brightGreen": "#33FF00",
-            "brightPurple": "#CC00FF",
-            "brightRed": "#FF0000",
-            "brightWhite": "#FFFFFF",
-            "brightYellow": "#FFFF00",
-            "cursorColor": "#FFFFFF",
-            "cyan": "#00C5C7",
-            "foreground": "#C7C7C7",
-            "green": "#3AD900",
-            "name": "Cobalt2",
-            "purple": "#FF2C70",
-            "red": "#FF2600",
-            "selectionBackground": "#FFFFFF",
-            "white": "#C7C7C7",
-            "yellow": "#FFC600"
-        },
-        {
-            "background": "#073642",
-            "black": "#073642",
-            "blue": "#268BD2",
-            "brightBlack": "#002B36",
-            "brightBlue": "#839496",
-            "brightCyan": "#93A1A1",
-            "brightGreen": "#586E75",
-            "brightPurple": "#6C71C4",
-            "brightRed": "#CB4B16",
-            "brightWhite": "#FDF6E3",
-            "brightYellow": "#657B83",
-            "cursorColor": "#FFFFFF",
-            "cyan": "#2AA198",
-            "foreground": "#FDF6E3",
-            "green": "#859900",
-            "name": "Solarized Blue",
-            "purple": "#D33682",
-            "red": "#D30102",
-            "selectionBackground": "#FFFFFF",
-            "white": "#EEE8D5",
-            "yellow": "#B58900"
-        },
-        {
-            "background": "#2C001E",
-            "black": "#4E9A06",
-            "blue": "#3465A4",
-            "brightBlack": "#555753",
-            "brightBlue": "#729FCF",
-            "brightCyan": "#34E2E2",
-            "brightGreen": "#8AE234",
-            "brightPurple": "#AD7FA8",
-            "brightRed": "#EF2929",
-            "brightWhite": "#EEEEEE",
-            "brightYellow": "#FCE94F",
-            "cursorColor": "#FFFFFF",
-            "cyan": "#06989A",
-            "foreground": "#EEEEEE",
-            "green": "#300A24",
-            "name": "UbuntuLegit",
-            "purple": "#75507B",
-            "red": "#CC0000",
-            "selectionBackground": "#FFFFFF",
-            "white": "#D3D7CF",
-            "yellow": "#C4A000"
-        }
-    ],
+    "schemes": [],
     "startOnUserLogin": true,
     "themes": []
 }
