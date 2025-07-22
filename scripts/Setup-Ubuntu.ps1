@@ -157,7 +157,7 @@ if ($LASTEXITCODE -ne 0) { throw "failed to install zsh." }
 # fzf
 & $distro run "git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf"
 if ($LASTEXITCODE -ne 0) { throw "failed to clone fzf." }
-& $distro run "~/.fzf/install"
+& $distro run "~/.fzf/install --all"
 if ($LASTEXITCODE -ne 0) { throw "failed to install fzf." }
 
 # oh-my-zsh
