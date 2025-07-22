@@ -15,14 +15,14 @@ choco install -y googlechrome
 #region Common Tools
 Write-Host "Installing Common Tools..." -ForegroundColor Yellow
 choco install -y 7zip
-winget install -e -h --id JohnMacFarlane.Pandoc --all --accept-source-agreements --accept-package-agreements
-winget install -e -h --id Microsoft.PowerToys --all --accept-source-agreements --accept-package-agreements # Note: Settings for PowerToys should be synced separately.
+winget install -e -h --id JohnMacFarlane.Pandoc --accept-source-agreements --accept-package-agreements
+winget install -e -h --id Microsoft.PowerToys --accept-source-agreements --accept-package-agreements # Note: Settings for PowerToys should be synced separately.
 #endregion
 
 #region Development Tools
 Write-Host "Installing Development Tools..." -ForegroundColor Yellow
-winget install -e -h --id AndreasWascher.RepoZ --all --accept-source-agreements --accept-package-agreements
-winget install -e -h --id GitHub.cli --all --accept-source-agreements --accept-package-agreements
+winget install -e -h --id AndreasWascher.RepoZ --accept-source-agreements --accept-package-agreements
+winget install -e -h --id GitHub.cli --accept-source-agreements --accept-package-agreements
 choco install -y python
 #endregion
 
