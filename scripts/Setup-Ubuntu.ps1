@@ -186,6 +186,12 @@ if ($foundOmz -match "omz not found") {
     if ($LASTEXITCODE -ne 0) { throw "failed to install zsh-syntax-highlighting plugin." }
 }
 
+# profile settings for zshrc and fzf
+& $distro run "curl -fsSL https://raw.githubusercontent.com/predragstefanovic/winplay/refs/heads/main/config/zsh/.zshrc -o ~/.zshrc"
+if ($LASTEXITCODE -ne 0) { throw "failed to install oh my zsh profile settings." }
+& $distro run "curl -fsSL https://raw.githubusercontent.com/predragstefanovic/winplay/refs/heads/main/config/zsh/.fzf.zsh -o ~/.fzf.zsh"
+if ($LASTEXITCODE -ne 0) { throw "failed to install oh my fzf settings." }
+
 # activate zsh to be the default shell
 & $distro run "sudo -S <<< ${password} chsh -s /usr/bin/zsh $username"
 if ($LASTEXITCODE -ne 0) { throw "Shell change to zsh failed." }
