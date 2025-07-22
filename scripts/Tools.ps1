@@ -15,7 +15,6 @@ choco install -y googlechrome
 #region Common Tools
 Write-Host "Installing Common Tools..." -ForegroundColor Yellow
 choco install -y 7zip
-winget install -e -h --id Microsoft.BingWallpaper
 winget install -e -h --id JohnMacFarlane.Pandoc
 winget install -e -h --id Microsoft.Whiteboard -s msstore
 winget install -e -h --id Microsoft.PowerToys # Note: Settings for PowerToys should be synced separately.

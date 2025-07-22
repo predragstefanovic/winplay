@@ -133,7 +133,4 @@ if ($LASTEXITCODE -ne 0) { throw "WSL termination failed." }
 & $distro config --default-user "$username"
 if ($LASTEXITCODE -ne 0) { throw "Setting default user failed." }
 
-net use L: '\\wsl$\Ubuntu' /persistent:yes
-if ($LASTEXITCODE -ne 0) { throw "Unable to mount wsl network drive." }
-
 Write-Host "'$distroDisplayName' installation and configuration completed." -ForegroundColor Green

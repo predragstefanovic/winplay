@@ -17,6 +17,7 @@ $wslKernelUpdatePackage = Join-Path $env:TEMP "wsl_update_x64.msi"
 Invoke-RestMethod -Uri "https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi" -OutFile $wslKernelUpdatePackage
 Start-Process msiexec.exe -Wait -ArgumentList "/I $wslKernelUpdatePackage /quiet"
 
+RefreshEnv
 
 # Set WSL1 as the default version
 Write-Host "Setting WSL1 as the default version..." -ForegroundColor Yellow

@@ -21,8 +21,7 @@ A recipe is the script you run. It calls multiple helper scripts. These currentl
 Run a recipe script. You can then leave the job unattended and come back when it's finished.
 
 **Post processing steps:**  
-1. For WSL there's a followup step after running the setup script.  When the script finishes you will only have a root user with a blank password. You should  manually create a non-root user via `$ sudo adduser [USERNAME] sudo` 
-with a non-blank password. Use this user going forward. For more info on WSL please refer to the [documentation](https://docs.microsoft.com/en-us/windows/wsl/about).
+1. nothing for now
 
 ## Known issues
 - The Boxstarter ClickOnce installer does not work when using Chrome.  This issue is being tracked [here](https://github.com/chocolatey/boxstarter/issues/345). Please use Edge to run the ClickOnce installer.
