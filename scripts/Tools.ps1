@@ -24,49 +24,38 @@ Write-Host "Installing Development Tools..." -ForegroundColor Yellow
 winget install -e -h --id AndreasWascher.RepoZ --accept-source-agreements --accept-package-agreements
 winget install -e -h --id GitHub.cli --accept-source-agreements --accept-package-agreements
 choco install -y python
+choco install -y vscode
+winget install -e -h --id JetBrains.Toolbox
+#endregion
+
+
+
+#region Windows Terminal Configuration
+Write-Host "Configuring PowerShell, Windows Terminal and Oh-My-Posh......" -ForegroundColor Yellow
+# Install Windows Terminal (Stable and Preview) and Cascadia Code Nerd Font.
+winget install -e -h --id Microsoft.PowerShell
+winget install -e -h --id Microsoft.WindowsTerminal
+winget install -e -h --id JanDeDobbeleer.OhMyPosh
+
+RefreshEnv
+
+pwsh -Command { Install-Module posh-git -Scope CurrentUser -Force }
+oh-my-posh font install meslo
+
+# Configure PowerShell
+Remove-Item -Path "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -Force -ErrorAction SilentlyContinue
+New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\Documents\\PowerShell\Microsoft.PowerShell_profile.ps1" -Target "$env:USERPROFILE\winplay\config\powerShell\Microsoft.PowerShell_profile.ps1"
+
+# Configure Windows Terminal settings and icons.
+$terminalSettingsPath = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+$terminalIconsPath = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState\"
+Remove-Item -Path $terminalSettingsPath -Force -ErrorAction SilentlyContinue
+New-Item -ItemType SymbolicLink -Path $terminalSettingsPath -Target "$env:USERPROFILE\winplay\config\windowsTerminal\settings.json"
+Copy-Item -Path "$env:USERPROFILE\winplay\config\windowsTerminal\icons\*" -Destination $terminalIconsPath -Force
 #endregion
 
 # TODO: replace with windows terminal and ohmyzsh setup
 
-# #region PowerShell Configuration
-# Write-Host "Configuring PowerShell..." -ForegroundColor Yellow
-# winget install -e -h --id Microsoft.PowerShell
-# RefreshEnv
-# # Create a symbolic link for the PowerShell profile.
-# Remove-Item -Path "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -Force -ErrorAction SilentlyContinue
-# New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\Documents\\PowerShell\Microsoft.PowerShell_profile.ps1" -Target "$env:USERPROFILE\winplay\config\powerShell\Microsoft.PowerShell_profile.ps1"
-# #endregion
-
-# #region Prompt Customization
-# Write-Host "Configuring Prompt..." -ForegroundColor Yellow
-# winget install -e -h --id JanDeDobbeleer.OhMyPosh
-# RefreshEnv
-# pwsh -Command { Install-Module posh-git -Scope CurrentUser -Force }
-# #endregion
-
-# #region Nushell Configuration
-# Write-Host "Configuring NuShell..." -ForegroundColor Yellow
-# winget install -e -h --id Nushell.Nushell
-# RefreshEnv
-# # saves an initialization script to ~/.oh-my-posh.nu that will be used in Nushell config file
-# oh-my-posh init nu --config "$env:USERPROFILE\winplay\config\prompt\.oh-my-posh.omp.json"
-# Remove-Item -Path "$env:USERPROFILE\AppData\Roaming\nushell\config.nu" -Force
-# New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\AppData\Roaming\nushell\config.nu" -Target "$env:USERPROFILE\winplay\config\nu\config.nu"
-# #endregion
-
-# #region Windows Terminal Configuration
-# Write-Host "Configuring Windows Terminal..." -ForegroundColor Yellow
-# # Install Windows Terminal (Stable and Preview) and Cascadia Code Nerd Font.
-# winget install -e -h --id Microsoft.WindowsTerminal
-# choco install -y cascadia-code-nerd-font
-
-# # Configure Windows Terminal settings and icons.
-# $terminalSettingsPath = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-# $terminalIconsPath = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState\"
-# Remove-Item -Path $terminalSettingsPath -Force -ErrorAction SilentlyContinue
-# New-Item -ItemType SymbolicLink -Path $terminalSettingsPath -Target "$env:USERPROFILE\winplay\config\windowsTerminal\settings.json"
-# Copy-Item -Path "$env:USERPROFILE\winplay\config\windowsTerminal\icons\*" -Destination $terminalIconsPath -Force
-# #endregion
 
 #region Azure Tools
 Write-Host "Installing Azure Tools..." -ForegroundColor Yellow

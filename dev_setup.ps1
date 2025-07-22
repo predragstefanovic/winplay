@@ -56,7 +56,6 @@ Write-Host "Configuring git and winget..."
 . "$env:USERPROFILE\winplay\scripts\FileExplorerSettings.ps1"
 . "$env:USERPROFILE\winplay\scripts\RemoveDefaultApps.ps1"
 . "$env:USERPROFILE\winplay\scripts\Tools.ps1"
-. "$env:USERPROFILE\winplay\scripts\IDEs.ps1"
 
 # --- Finalization ---
 # Re-enable User Account Control (UAC).
