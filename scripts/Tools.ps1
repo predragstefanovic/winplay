@@ -14,9 +14,9 @@ choco install -y googlechrome
 
 #region PowerShell, Terminal and Themes
 Write-Host "Configuring PowerShell, Windows Terminal and Oh-My-Posh..." -ForegroundColor Yellow
-winget install -e -h --id Microsoft.PowerShell
-winget install -e -h --id Microsoft.WindowsTerminal
-winget install -e -h --id JanDeDobbeleer.OhMyPosh
+winget install -e -h --id Microsoft.PowerShell --accept-source-agreements --accept-package-agreements
+winget install -e -h --id Microsoft.WindowsTerminal --accept-source-agreements --accept-package-agreements
+winget install -e -h --id JanDeDobbeleer.OhMyPosh --accept-source-agreements --accept-package-agreements
 
 RefreshEnv
 oh-my-posh font install meslo
@@ -60,7 +60,7 @@ winget install -e -h --id AndreasWascher.RepoZ --accept-source-agreements --acce
 winget install -e -h --id GitHub.cli --accept-source-agreements --accept-package-agreements
 choco install -y python
 choco install -y vscode
-winget install -e -h --id JetBrains.Toolbox
+winget install -e -h --id JetBrains.Toolbox --accept-source-agreements --accept-package-agreements
 #endregion
 
 #region Azure Tools
