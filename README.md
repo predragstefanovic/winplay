@@ -58,8 +58,14 @@ This script will install the following software on your machine:
 *   **Oh My Posh:** A prompt theme engine for PowerShell.
 *   **Microsoft Azure CLI:** Command-line tool for Azure.
 *   **posh-git:** A PowerShell module that integrates Git and PowerShell.
+*   **psfzf:** A PowerShell module that integrates fzf and PowerShell
 *   **Meslo Nerd Font:** Installed via Oh My Posh for better terminal icons.
-
+*   **nano:** A simple text editor.
+*   **bat:** A `cat` clone with syntax highlighting.
+*   **less:** ...
+*   **eza:** ...
+*   **jq:** A command-line JSON processor.
+*   **fzf:** A command-line fuzzy finder.
 
 ## Known issues
 - The Boxstarter ClickOnce installer does not work when using Chrome.  This issue is being tracked [here](https://github.com/chocolatey/boxstarter/issues/345). Please use Edge to run the ClickOnce installer.

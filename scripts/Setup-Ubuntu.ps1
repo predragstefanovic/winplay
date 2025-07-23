@@ -158,6 +158,10 @@ if ($LASTEXITCODE -ne 0) { throw "failed to install gh cli." }
 & $distro run "sudo -S <<< ${password} apt install zsh -y"
 if ($LASTEXITCODE -ne 0) { throw "failed to install zsh." }
 
+# fd
+& $distro run "sudo -S <<< ${password} apt install fd-find -y"
+if ($LASTEXITCODE -ne 0) { throw "failed to install fd-find." }
+
 # profile settings for zshrc and fzf
 & $distro run "curl -fsSL https://raw.githubusercontent.com/predragstefanovic/winplay/refs/heads/main/config/zsh/.zshrc -o ~/.zshrc"
 if ($LASTEXITCODE -ne 0) { throw "failed to install oh my zsh profile settings." }
