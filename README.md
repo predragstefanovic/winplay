@@ -118,3 +118,5 @@ You can double-check any of your settings by typing `git config --global user.na
     * Semantically break up large scripts
     * Reduce repetition
     * Abstract away parameters, at least default username and password
+
+Test change from vscode on my windows machine
