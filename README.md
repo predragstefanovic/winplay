@@ -1,30 +1,26 @@
-source: https://github.com/microsoft/windows-dev-box-setup-scripts/
+# WinPlay
 
-source: https://github.com/TechWatching/dotfiles/tree/main
+Provides a single-click experience for booting up a developer environment in Windows 10/11.
+> Note: the scripts are tailored to my needs. Use the scripts at your own discretion.
 
-source: https://github.com/Vets-Who-Code/windows-dev-guide
+sources:
+* https://github.com/microsoft/windows-dev-box-setup-scripts/
+* https://github.com/TechWatching/dotfiles/tree/main
+* https://github.com/Vets-Who-Code/windows-dev-guide
 
-(manual forking)
+## How to run
 
-## Project structure
-The script code is organized in a hierarchy
+Run the `dev_setup.ps1` script with Boxstarter. Ideally you can then leave the job unattended and come back when it's finished. It may automatically restart the system a few times and resume. At start it will prompt to elevate rights to Administrator and ask for user login password and cache it locally.
 
-**Recipes**
-A recipe is the script you run. It calls multiple helper scripts. These currently live in the root of the project (e.g. dev_setup.ps1)
+**Click <a href='http://boxstarter.org/package/url?https://raw.githubusercontent.com/predragstefanovic/winplay/main/dev_setup.ps1'> HERE </a> to start it up with `boxstarter`.** 
 
-**Helper Scripts**: A helper script performs setup routines that may be useful by many recipes. Recipes call helper scripts (you don't run helper scripts directly).  The helper scripts live in the **scripts** folder
+> Note: Please use Edge to run the ClickOnce installer. The Boxstarter ClickOnce installer does not work through Chrome. This issue is being tracked [here](https://github.com/chocolatey/boxstarter/issues/345).
 
-## How to run the scripts
+> Note: The script is idempotent.
 
-<a href='http://boxstarter.org/package/url?https://raw.githubusercontent.com/predragstefanovic/winplay/main/dev_setup.ps1'>CLICK TO START SETUP</a>
+## Software Being Installed
 
-Run a recipe script. You can then leave the job unattended and come back when it's finished.
-
-## Software Installed
-
-This script will install the following software on your machine:
-
-### Windows Environment
+This script will install and configure the following software on your machine:
 
 **WSL - Ubuntu:**
 *   **Microsoft-Windows-Subsystem-Linux:** Enables WSL.
@@ -37,10 +33,11 @@ This script will install the following software on your machine:
 *   **nano:** A simple text editor.
 *   **bat:** A `cat` clone with syntax highlighting.
 *   **jq:** A command-line JSON processor.
-*   **unzip:** ...
+*   **unzip:** A utility for decompressing `zip` archives.
 *   **Oh My Zsh:** A framework for managing Zsh configuration.
-*   **Oh My Posh:** A prompt theme engine for Zsh
+*   **Oh My Posh:** A prompt theme engine compatible with Zsh
 *   **fzf:** A command-line fuzzy finder.
+*   **fd-find:** A fast and user-friendly alternative to `find`.
 
 **Windows:**
 *   **Google Chrome:** Web browser.
@@ -62,26 +59,28 @@ This script will install the following software on your machine:
 *   **Meslo Nerd Font:** Installed via Oh My Posh for better terminal icons.
 *   **nano:** A simple text editor.
 *   **bat:** A `cat` clone with syntax highlighting.
-*   **less:** ...
-*   **eza:** ...
+*   **less:** A terminal pager for viewing file contents.
+*   **eza:** A modern replacement for the `ls` command.
 *   **jq:** A command-line JSON processor.
 *   **fzf:** A command-line fuzzy finder.
+*   **fd:** A fast and user-friendly alternative to `find`.
+
+The script also attempts to uninstall some typically unused software.
 
 ## Known issues
-- The Boxstarter ClickOnce installer does not work when using Chrome.  This issue is being tracked [here](https://github.com/chocolatey/boxstarter/issues/345). Please use Edge to run the ClickOnce installer.
 - WSL1 is used, since WSL2 requires enabling Virtualization in BIOS. There is a single line change to use WSL2 as default in the wsl.ps1 script
 
-## Post processing steps
+## Common follow up steps
 
-### WSL - Ubuntu
+### Ubuntu: Change default password
 
-Change the password for the default user. Open a WSL command line and type:
+Change the password for the default user. Open a WSL command line and type (default password is `admin`):
 
 ```sh
 passwd
 ```
 
-### Git
+### Git Configuration
 
 #### Name
 
@@ -91,7 +90,7 @@ To set up your Git config file, open a WSL command line and set your name with t
 git config --global user.name "Your Name"
 ```
 
-### Email
+#### Email
 
 Set your email with this command (replacing "youremail@domain.com" with the email you prefer):
 
@@ -99,7 +98,7 @@ Set your email with this command (replacing "youremail@domain.com" with the emai
 git config --global user.email "youremail@domain.com"
 ```
 
-### Username
+#### Username
 
 And finally, add your GitHub username to link it to git (case sensitive!):
 
@@ -111,7 +110,11 @@ Make sure you are inputting `user.username` and not `user.name` otherwise, you w
 
 You can double-check any of your settings by typing `git config --global user.name` and so on. To make any changes just type the necessary command again as in the examples above.
 
-TODO
+## Open Items
 
-* OPEN docker installation for wsl1/2
-* OPEN clean up
+* WSL2 Docker Setup
+* Code Refactor
+    * Consistent documentation, logging and error handling
+    * Semantically break up large scripts
+    * Reduce repetition
+    * Abstract away parameters, at least default username and password
