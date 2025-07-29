@@ -3,7 +3,7 @@
     Installs Ubuntu distribution for WSL.
 
 .DESCRIPTION
-    This script installs Ubuntu 24.04 for Windows Subsystem for Linux (WSL)
+    This script installs latest Ubuntu LTS (tested for 24.04) for Windows Subsystem for Linux (WSL)
     by downloading the official Appx package and setting up a non-root user.
 
     Features:
@@ -17,8 +17,8 @@
 # --- Configuration ---
 $username = "predrag"
 $password = "admin"
-$distro = "ubuntu2404"
-$distroDisplayName = "Ubuntu-24.04"
+$distro = "ubuntu"
+$distroDisplayName = "Ubuntu"
 $installerUrl = "https://aka.ms/wslubuntu"
 
 Write-Host "Installing and configuring '$distroDisplayName'..." -ForegroundColor Yellow
@@ -41,7 +41,8 @@ if ($existingDistros -match "^$distroDisplayName$") {
 
     # Install the distro in root mode (non-interactive setup)
     Write-Host "Adding installer package..." -ForegroundColor Yellow
-    Get-AppxPackage
+    # Bug fix for Win11, missing dependencies for Appx - https://stackoverflow.com/questions/79506247/the-type-initializer-for-module-threw-an-exception-exception-in-windows-11-2
+    Add-Type -path "C:\Windows\System32\WindowsPowerShell\v1.0\System.*.dll"
     Add-AppxPackage -Path $ubuntuInstaller
     Write-Host "Installer package added..." -ForegroundColor Yellow
 

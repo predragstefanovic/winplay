@@ -25,7 +25,7 @@ This script will install and configure the following software on your machine:
 **WSL - Ubuntu:**
 *   **Microsoft-Windows-Subsystem-Linux:** Enables WSL.
 *   **WSL Kernel:** The latest kernel for the Windows Subsystem for Linux.
-*   **Ubuntu 24.04:** Installed as a WSL distribution.
+*   **Ubuntu Latest LTS:** Installed as a WSL distribution.
 *   **curl:** Command-line tool for transferring data with URLs.
 *   **git:** Version control system (within WSL).
 *   **gh:** GitHub CLI (within WSL).

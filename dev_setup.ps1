@@ -19,16 +19,6 @@ $Boxstarter.AutoLogin=$true
 # Enable Developer Mode on the system.
 Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelUnlock -Name AllowDevelopmentWithoutDevLicense -Value 1
 
-# debugging - fail fast
-Add-Type -path "C:\Windows\System32\WindowsPowerShell\v1.0\System.*.dll"
-Import-Module Appx
-RefreshEnv
-$ubuntuInstaller = Join-Path $env:TEMP "Ubuntu.appx"
-Write-Host "Adding installer package $ubuntuInstaller..." -ForegroundColor Yellow
-Get-AppxPackage
-Write-Host "Installer package added $ubuntuInstaller..." -ForegroundColor Yellow
-
-
 # Install winget if it's not already installed.
 Write-Host "Installing winget..."
 $wingetInstallScript = Join-Path $env:TEMP "winget-install.ps1"
