@@ -39,7 +39,11 @@ if ($existingDistros -match "^$distroDisplayName$") {
         Invoke-WebRequest -Uri $installerUrl -OutFile $ubuntuInstaller -UseBasicParsing
     }
 
+    # Install the distro in root mode (non-interactive setup)
+    Write-Host "Adding installer package..." -ForegroundColor Yellow
+    Get-AppxPackage
     Add-AppxPackage -Path $ubuntuInstaller
+    Write-Host "Installer package added..." -ForegroundColor Yellow
 
     # Make sure updated environment variables (e.g., new PATH) are available
     RefreshEnv
