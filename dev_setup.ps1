@@ -16,10 +16,14 @@ $Boxstarter.RebootOk=$true
 $Boxstarter.NoPassword=$false
 $Boxstarter.AutoLogin=$true
 
-
 # Enable Developer Mode on the system.
 Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelUnlock -Name AllowDevelopmentWithoutDevLicense -Value 1
 
+# Upgrade choco
+choco upgrade -y chocolatey
+
+# import appx module
+Import-Module -Name Appx
 
 # Install winget if it's not already installed.
 Write-Host "Installing winget..."
