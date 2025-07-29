@@ -16,6 +16,8 @@ Run the `dev_setup.ps1` script with Boxstarter. Ideally you can then leave the j
 
 > Note: Please use Edge to run the ClickOnce installer. The Boxstarter ClickOnce installer does not work through Chrome. This issue is being tracked [here](https://github.com/chocolatey/boxstarter/issues/345).
 
+> Note: On Win11 it will fail to install winget, missing dependencies for Appx - https://stackoverflow.com/questions/79506247/the-type-initializer-for-module-threw-an-exception-exception-in-windows-11-2. Open Powershell as administrator and run the following: `Add-Type -path "C:\Windows\System32\WindowsPowerShell\v1.0\System.*.dll"`
+
 > Note: The script is idempotent.
 
 ## Software Being Installed
