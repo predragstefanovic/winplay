@@ -19,13 +19,12 @@ $Boxstarter.AutoLogin=$true
 # Enable Developer Mode on the system.
 Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelUnlock -Name AllowDevelopmentWithoutDevLicense -Value 1
 
-# import appx module
-Import-Module -Name Appx
-
 # Install winget if it's not already installed.
 Write-Host "Installing winget..."
 $wingetInstallScript = Join-Path $env:TEMP "winget-install.ps1"
 Invoke-RestMethod -Uri "https://github.com/asheroto/winget-install/releases/latest/download/winget-install.ps1" -OutFile $wingetInstallScript
+# Bug fix for Win11, missing dependencies for Appx - https://stackoverflow.com/questions/79506247/the-type-initializer-for-module-threw-an-exception-exception-in-windows-11-2
+Add-Type -path "C:\Windows\System32\WindowsPowerShell\v1.0\System.*.dll"
 & $wingetInstallScript
 
 Write-Host "Installing Git..."
