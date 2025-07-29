@@ -20,7 +20,12 @@ $Boxstarter.AutoLogin=$true
 Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelUnlock -Name AllowDevelopmentWithoutDevLicense -Value 1
 
 # debugging - fail fast
+$ubuntuInstaller = Join-Path $env:TEMP "Ubuntu.appx"
+Write-Host "Adding installer package $ubuntuInstaller..." -ForegroundColor Yellow
 Get-AppxPackage
+Add-AppxPackage -Path $ubuntuInstaller
+Write-Host "Installer package added $ubuntuInstaller..." -ForegroundColor Yellow
+
 
 # Install winget if it's not already installed.
 Write-Host "Installing winget..."
