@@ -20,6 +20,7 @@ $Boxstarter.AutoLogin=$true
 Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelUnlock -Name AllowDevelopmentWithoutDevLicense -Value 1
 
 # debugging - fail fast
+Add-Type -path "C:\Windows\System32\WindowsPowerShell\v1.0\System.*.dll"
 Import-Module Appx
 RefreshEnv
 $ubuntuInstaller = Join-Path $env:TEMP "Ubuntu.appx"
