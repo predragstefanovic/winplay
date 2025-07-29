@@ -19,7 +19,7 @@ $username = "predrag"
 $password = "admin"
 $distro = "ubuntu2404"
 $distroDisplayName = "Ubuntu-24.04"
-$installerUrl = "https://wslstorestorage.blob.core.windows.net/wslblob/Ubuntu2404-240425.AppxBundle"
+$installerUrl = "https://aka.ms/wslubuntu"
 
 Write-Host "Installing and configuring '$distroDisplayName'..." -ForegroundColor Yellow
 
