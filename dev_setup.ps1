@@ -23,7 +23,6 @@ Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelU
 $ubuntuInstaller = Join-Path $env:TEMP "Ubuntu.appx"
 Write-Host "Adding installer package $ubuntuInstaller..." -ForegroundColor Yellow
 Get-AppxPackage
-Add-AppxPackage -Path $ubuntuInstaller
 Write-Host "Installer package added $ubuntuInstaller..." -ForegroundColor Yellow
 
 
