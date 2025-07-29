@@ -20,6 +20,8 @@ $Boxstarter.AutoLogin=$true
 Set-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelUnlock -Name AllowDevelopmentWithoutDevLicense -Value 1
 
 # debugging - fail fast
+Import-Module Appx
+RefreshEnv
 $ubuntuInstaller = Join-Path $env:TEMP "Ubuntu.appx"
 Write-Host "Adding installer package $ubuntuInstaller..." -ForegroundColor Yellow
 Get-AppxPackage
