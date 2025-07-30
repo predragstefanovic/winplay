@@ -67,8 +67,6 @@ $applicationList = @(
 	"*.AdobePhotoshopExpress"
 );
 
-# Bug fix for Win11, missing dependencies for Appx - https://stackoverflow.com/questions/79506247/the-type-initializer-for-module-threw-an-exception-exception-in-windows-11-2
-Add-Type -path "C:\Windows\System32\WindowsPowerShell\v1.0\System.*.dll"
 foreach ($app in $applicationList) {
     removeApp $app
 }

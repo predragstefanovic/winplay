@@ -41,8 +41,6 @@ if ($existingDistros -match "^$distroDisplayName$") {
 
     # Install the distro in root mode (non-interactive setup)
     Write-Host "Adding installer package..." -ForegroundColor Yellow
-    # Bug fix for Win11, missing dependencies for Appx - https://stackoverflow.com/questions/79506247/the-type-initializer-for-module-threw-an-exception-exception-in-windows-11-2
-    Add-Type -path "C:\Windows\System32\WindowsPowerShell\v1.0\System.*.dll"
     Add-AppxPackage -Path $ubuntuInstaller
     Write-Host "Installer package added..." -ForegroundColor Yellow
 

@@ -14,11 +14,25 @@ Run the `dev_setup.ps1` script with Boxstarter. Ideally you can then leave the j
 
 **Click <a href='http://boxstarter.org/package/url?https://raw.githubusercontent.com/predragstefanovic/winplay/main/dev_setup.ps1'> HERE </a> to start it up with `boxstarter`.** 
 
+> Note: The script is idempotent.
+
 > Note: Please use Edge to run the ClickOnce installer. The Boxstarter ClickOnce installer does not work through Chrome. This issue is being tracked [here](https://github.com/chocolatey/boxstarter/issues/345).
 
-> Note: On Win11 it will fail to install winget, missing dependencies for Appx - https://stackoverflow.com/questions/79506247/the-type-initializer-for-module-threw-an-exception-exception-in-windows-11-2. Open Powershell as administrator and run the following: `Add-Type -path "C:\Windows\System32\WindowsPowerShell\v1.0\System.*.dll"`
+> Note: On Win11 there are missing dependencies for Appx causing some installations to fail - https://stackoverflow.com/questions/79506247/the-type-initializer-for-module-threw-an-exception-exception-in-windows-11-2. Open Powershell as administrator and run the following:
+```
+Add-Type -AssemblyName "System.EnterpriseServices"
+$publish = [System.EnterpriseServices.Internal.Publish]::new()
 
-> Note: The script is idempotent.
+@(
+    'System.Numerics.Vectors.dll',
+    'System.Runtime.CompilerServices.Unsafe.dll',
+    'System.Security.Principal.Windows.dll',
+    'System.Memory.dll'
+) | ForEach-Object {
+    $dllPath = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\$_"
+    $publish.GacInstall($dllPath)
+}
+```
 
 ## Software Being Installed
 
