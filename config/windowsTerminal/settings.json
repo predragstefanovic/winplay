@@ -29,7 +29,7 @@
                 "backgroundImage": "ms-appdata:///roaming/OS_Ubuntu.png",
                 "backgroundImageOpacity": 0.3,
                 "backgroundImageStretchMode": "none",
-                "colorScheme": "Ubuntu-24.04-ColorScheme",
+                "colorScheme": "Ubuntu-ColorScheme",
                 "commandline": "C:\\Windows\\system32\\wsl.exe -d Ubuntu",
                 "guid": "{731948b0-c276-49e6-9c31-62cc6ed96633}",
                 "hidden": false,
