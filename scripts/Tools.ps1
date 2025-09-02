@@ -56,6 +56,7 @@ Copy-Item -Path "$env:USERPROFILE\winplay\config\windowsTerminal\icons\*" -Desti
 
 #region Development Tools
 Write-Host "Installing Development Tools..." -ForegroundColor Yellow
+iex "& { $(irm https://aka.ms/install-artifacts-credprovider.ps1) }"
 winget install -e -h --id AndreasWascher.RepoZ --accept-source-agreements --accept-package-agreements
 winget install -e -h --id GitHub.cli --accept-source-agreements --accept-package-agreements
 choco install -y python
