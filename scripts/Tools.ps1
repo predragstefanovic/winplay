@@ -66,7 +66,7 @@ winget install -e -h --id JetBrains.Toolbox --accept-source-agreements --accept-
 #region Azure Tools
 Write-Host "Installing Azure Tools..." -ForegroundColor Yellow
 winget install -e -h --id Microsoft.AzureCLI --accept-source-agreements --accept-package-agreements
-# winget install -e -h --id Microsoft.AzureCosmosEmulator
+winget install -e -h --id Microsoft.AzureCosmosEmulator --accept-source-agreements --accept-package-agreements
 # winget install -e -h --id Microsoft.AzureDataStudio
 # winget install -e -h --id Microsoft.azure-iot-explorer
 # winget install -e -h --id Microsoft.AzureStorageExplorer
