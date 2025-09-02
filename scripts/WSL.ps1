@@ -42,7 +42,7 @@ Start-Process msiexec.exe -Wait -ArgumentList "/I $wslKernelUpdatePackage /quiet
 RefreshEnv
 
 # Set WSL1 as the default version
-Write-Host "Setting WSL1 as the default version..." -ForegroundColor Yellow
-wsl --set-default-version 1
+# Write-Host "Setting WSL1 as the default version..." -ForegroundColor Yellow
+# wsl --set-default-version 1
 
 Write-Host "WSL installation and configuration complete." -ForegroundColor Green
